@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+    <html lang="en-US">
+        <head>
+            <meta charset="utf-8">
+            <title>Multidiscount calculator</title>
+            <link rel="stylesheet" href="./style.css">
+            <script src="./index.js" defer></script>
+        </head>
+        <body>
+            <section>
+                <section class="discount-definition-section">
+                    <form action="" method="post">
+                        <legend>Discount Definition</legend>
+                        <div class="each-discount-definition-row">
+                            <div class="item-count-input-area">
+                                <label for="item-count">Item count</label>
+                                <input type="text" id="item-count" name="item-count">
+                            </div>
+                            <div class="discount-input-area">
+                                <label for="discount">Discount</label>
+                                <input type="text" id="discount" name="discount">
+                            </div>
+                        </div>
+                    </form>
+                    <button type="button" class="add-button">+ Add</button>
+                </section>
+                <section class="product-section">
+                    <form action="" method="post">
+                        <legend>Products</legend>
+                        <div class="each-product-row">
+                            <div class="product-name-input-area">
+                                <label for="product-name" class="product-name-label">Product name</label>
+                                <input type="text" id="product-name" name="product-name">
+                            </div>
+                            <div class="price-input-area">
+                                <label for="price" class="price-label">Price</label>
+                                <input type="text" id="price" name="price">
+                            </div>                            
+                        </div>
+                    </form>
+                    <button type="button" class="add-button">+ Add</button>
+                </section>
+            </section>
+            <section>
+                <div class="summary-header-and-generate-button">
+                    <h2>Summary</h2>
+                    <button type="button">Generate</button>
+                </div>
+                <ul class="grouped-products-list">
+                    <li class="grouped-product">
+                        <div class="products-list-part">
+                            <h2>2 Products, 35% Discount</h2>
+                            <ul>
+                                <li>Fridge</li>
+                                <li>Oven</li>
+                            </ul>
+                        </div>
+                        <div class="savings-part">
+                            <h2>SAVINGS: 1750</h2>
+                        </div>
+                    </li>
+                    <li class="grouped-product">
+                        <div class="products-list-part">
+                            <h2>2 Products, 35% Discount</h2>
+                            <ul>
+                                <li>Fridge</li>
+                                <li>Oven</li>
+                            </ul>
+                        </div>
+                        <div class="savings-part">
+                            <h2>SAVINGS: 1750</h2>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </body>
+    </html>

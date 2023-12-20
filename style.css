@@ -1,0 +1,146 @@
+html {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    width: 90vw;
+}
+ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: disc;
+}
+.discount-definition-section {
+    border-bottom: 1px solid  rgb(116, 116, 116);
+}
+.discount-definition-section form legend, .product-section form legend, .summary-header-and-generate-button h2 {
+    color:rgb(28, 28, 28);
+    font-size: 20px;
+    width: 90vw;
+}
+.summary-header-and-generate-button h2 {
+    font-weight: 200;
+}
+.discount-definition-section form legend {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+.product-section form legend {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+.each-discount-definition-row, .each-product-row{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+}
+.item-count-input-area, .discount-input-area, .product-name-input-area, .price-input-area {
+    position: relative;
+}
+.item-count-input-area label, .discount-input-area label, .product-name-input-area label, .price-input-area label {
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    z-index: 1;
+    background-color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: black;
+    font-size: 14px;
+}
+#item-count, #discount, #product-name, #price {
+    width: 40vw;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid rgb(116, 116, 116);
+}
+.add-button {
+    background-color: rgb(104,81,166);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    height: 25px;
+    width: 60px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.summary-header-and-generate-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90vw;
+}
+.summary-header-and-generate-button button {
+    background-color: rgb(104,81,166);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    height: 35px;
+    width: 120px;
+    cursor: pointer;
+}
+.grouped-products-list {
+    margin-bottom: 30px;
+}
+.grouped-product {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(248, 242, 251);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.products-list-part {
+    border-right: 1px solid rgb(28, 28, 28);
+    width: 45vw;
+    padding: 10px;
+}
+.savings-part {
+    align-self: center;
+    width: 45vw;
+    padding: 10px;
+}
+.products-list-part h2, .savings-part h2 {
+    margin: 0;
+}
+.products-list-part h2 {
+    color:rgb(28, 28, 28);
+    font-size: 20px;
+    font-weight: 200;
+}.products-list-part ul {
+    margin-left: 32px;
+    padding-top: 20px;
+}
+.savings-part h2 {
+    color:rgb(28, 28, 28);
+    font-size: 20px;
+    align-self: center;
+    padding-left: 20px;
+}
+
+@media (min-width: 992px) {
+    body {
+        display: flex;
+        justify-content: space-between;
+    }
+    .discount-definition-section form legend, .product-section form legend, .summary-header-and-generate-button h2 {
+        width: 34vw;
+    }
+    #item-count, #discount, #product-name, #price {
+        width: 15vw;
+    }
+    .summary-header-and-generate-button {
+        width: 45vw;
+    }
+    .products-list-part {
+        width: 20vw;
+    }
+    .savings-part {
+        width: 20vw;
+    }
+}
