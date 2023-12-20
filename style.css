@@ -67,6 +67,7 @@ ul {
     width: 60px;
     margin-top: 20px;
     margin-bottom: 30px;
+    cursor: pointer;
 }
 .summary-header-and-generate-button {
     display: flex;
