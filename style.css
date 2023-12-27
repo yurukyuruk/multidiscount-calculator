@@ -14,7 +14,7 @@ ul {
     margin: 0;
     list-style-type: disc;
 }
-.discount-definition-section {
+/*.discount-definition-section {
     border-bottom: 1px solid  rgb(116, 116, 116);
 }
 .discount-definition-section form legend, .product-section form legend, .summary-header-and-generate-button h2 {
@@ -22,9 +22,7 @@ ul {
     font-size: 20px;
     width: 90vw;
 }
-.summary-header-and-generate-button h2 {
-    font-weight: 200;
-}
+
 .discount-definition-section form legend {
     padding-top: 20px;
     padding-bottom: 30px;
@@ -75,6 +73,9 @@ ul {
     align-items: center;
     width: 90vw;
 }
+.summary-header-and-generate-button h2 {
+    font-weight: 200;
+}
 .summary-header-and-generate-button button {
     background-color: rgb(104,81,166);
     color: white;
@@ -122,14 +123,14 @@ ul {
     font-size: 20px;
     align-self: center;
     padding-left: 20px;
-}
+}*/
 
 @media (min-width: 992px) {
     body {
         display: flex;
         justify-content: space-between;
     }
-    .discount-definition-section form legend, .product-section form legend, .summary-header-and-generate-button h2 {
+    /*.discount-definition-section form legend, .product-section form legend, .summary-header-and-generate-button h2 {
         width: 34vw;
     }
     #item-count, #discount, #product-name, #price {
@@ -143,5 +144,5 @@ ul {
     }
     .savings-part {
         width: 20vw;
-    }
+    }*/
 }
