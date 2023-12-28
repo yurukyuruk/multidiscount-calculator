@@ -1,5 +1,6 @@
-import { buttons } from "./buttons.js";
-import { inputs } from "./inputs.js";
+//import { Buttons } from "./Buttons.js";
+//import { Inputs } from "./Inputs.js";
+//import { ListGenerator } from "./ListGenerator.js";
 const { template } = {
   template: `
     <style>  
@@ -11,6 +12,7 @@ const { template } = {
     }
     .summary-header-and-generate-button h2 {
         font-weight: 200;
+        font-size: 20px;
     }
     .summary-header-and-generate-button button {
         background-color: rgb(104,81,166);
@@ -23,6 +25,7 @@ const { template } = {
     }
     .grouped-products-list {
         margin-bottom: 30px;
+        padding-left: 0;
     }
     .grouped-product {
         display: flex;
@@ -106,11 +109,11 @@ const { template } = {
 };
 
 export class Summary extends HTMLElement {
-  static TAG = "summary";
+  static TAG = "element-summary";
 
   constructor() {
     super();
-    this.shadowRoot = this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = template;
     this.initilizeListeners();
   }

@@ -1,17 +1,17 @@
-import { buttons } from "./buttons.js";
-import { inputs } from "./inputs.js";
+//import { Buttons } from "./Buttons.js";
+//import { Inputs } from "./Inputs.js";
 const { template } = {
   template: `
     <style>  
     .discount-definition-section {
         border-bottom: 1px solid  rgb(116, 116, 116);
     }
-    .discount-definition-section form legend {
+    .discount-definition-section form details summary {
         color:rgb(28, 28, 28);
         font-size: 20px;
         width: 90vw;
     }
-    .discount-definition-section form legend {
+    .discount-definition-section form details summary {
         padding-top: 20px;
         padding-bottom: 30px;
     }
@@ -52,7 +52,7 @@ const { template } = {
         cursor: pointer;
     }
     @media (min-width: 992px) {
-        .discount-definition-section form legend {
+        .discount-definition-section form details summary {
             width: 34vw;
         }
         #item-count, #discount {
@@ -62,36 +62,35 @@ const { template } = {
   </style>
     <section class="discount-definition-section">
         <form action="" method="post">
-            <legend>Discount Definition</legend>
-            <div class="each-discount-definition-row">
-                <div class="item-count-input-area">
-                    <label for="item-count">Item count</label>
-                    <input type="text" id="item-count" name="item-count">
+            <details>
+                <summary>Discount Definition</summary>
+                <div class="each-discount-definition-row">
+                    <div class="item-count-input-area">
+                        <label for="item-count">Item count</label>
+                        <input type="text" id="item-count" name="item-count">
+                    </div>
+                    <div class="discount-input-area">
+                        <label for="discount">Discount</label>
+                        <input type="text" id="discount" name="discount">
+                    </div>
                 </div>
-                <div class="discount-input-area">
-                    <label for="discount">Discount</label>
-                    <input type="text" id="discount" name="discount">
-                </div>
-            </div>
+                <button type="button" class="add-button">+ Add</button>
+            </details>
         </form>
-        <button type="button" class="add-button">+ Add</button>
     </section>
     `
 };
 
 export class DiscountDefinition extends HTMLElement {
   static TAG = "discount-definition";
-
   constructor() {
     super();
-    this.shadowRoot = this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = template;
-    this.initilizeListeners();
+ 
   }
 
-  initilizeListeners() {
-   
-  }
+
 
   
 }

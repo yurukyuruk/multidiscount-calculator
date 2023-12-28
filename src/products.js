@@ -1,16 +1,16 @@
-import { buttons } from "./buttons.js";
-import { inputs } from "./inputs.js";
+//import { Buttons } from "./Buttons.js";
+//import { Inputs } from "./Inputs.js";
 const { template } = {
   template: `
     <style>  
-    .product-section form legend {
+    .product-section form details summary {
         color:rgb(28, 28, 28);
         font-size: 20px;
         width: 90vw;
         padding-top: 20px;
         padding-bottom: 30px;
     }
-    .discount-definition-section form legend {
+    .discount-definition-section form details summary {
         padding-top: 20px;
         padding-bottom: 30px;
     }
@@ -51,7 +51,7 @@ const { template } = {
         cursor: pointer;
     }
     @media (min-width: 992px) {
-        .product-section form legend {
+        .product-section form details summary {
             width: 34vw;
         }
         #product-name, #price {
@@ -61,29 +61,31 @@ const { template } = {
   </style>
     <section class="product-section">
         <form action="" method="post">
-            <legend>Products</legend>
-            <div class="each-product-row">
-                <div class="product-name-input-area">
-                    <label for="product-name" class="product-name-label">Product name</label>
-                    <input type="text" id="product-name" name="product-name">
+            <details>
+                <summary>Products</summary>
+                <div class="each-product-row">
+                    <div class="product-name-input-area">
+                        <label for="product-name" class="product-name-label">Product name</label>
+                        <input type="text" id="product-name" name="product-name">
+                    </div>
+                    <div class="price-input-area">
+                        <label for="price" class="price-label">Price</label>
+                        <input type="text" id="price" name="price">
+                    </div>                            
                 </div>
-                <div class="price-input-area">
-                    <label for="price" class="price-label">Price</label>
-                    <input type="text" id="price" name="price">
-                </div>                            
-            </div>
+                <button type="button" class="add-button">+ Add</button>
+            </details>
         </form>
-        <button type="button" class="add-button">+ Add</button>
     </section>
     `
 };
 
 export class Products extends HTMLElement {
-  static TAG = "products";
+  static TAG = "products-element";
 
   constructor() {
     super();
-    this.shadowRoot = this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = template;
     this.initilizeListeners();
   }
