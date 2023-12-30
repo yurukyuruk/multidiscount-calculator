@@ -1,5 +1,4 @@
-//import { Buttons } from "./Buttons.js";
-//import { Inputs } from "./Inputs.js";
+import { Button } from "./Button.js";
 //import { ListGenerator } from "./ListGenerator.js";
 const { template } = {
   template: `
@@ -13,15 +12,6 @@ const { template } = {
     .summary-header-and-generate-button h2 {
         font-weight: 200;
         font-size: 20px;
-    }
-    .summary-header-and-generate-button button {
-        background-color: rgb(104,81,166);
-        color: white;
-        border: none;
-        border-radius: 20px;
-        height: 35px;
-        width: 120px;
-        cursor: pointer;
     }
     .grouped-products-list {
         margin-bottom: 30px;
@@ -77,7 +67,6 @@ const { template } = {
   </style>
     <div class="summary-header-and-generate-button">
         <h2>Summary</h2>
-        <button type="button">Generate</button>
     </div>
     <ul class="grouped-products-list">
         <li class="grouped-product">
@@ -115,13 +104,19 @@ export class Summary extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = template;
+    this.getElementsReferences();
     this.initilizeListeners();
+    this.addButton();
   }
-
   initilizeListeners() {
-   
   }
-
+  addButton() {
+    const button = new Button("Generate", "generate-button");
+    this.summaryHeaderAndGenerateButton.append(button);
+  }
+  getElementsReferences() {
+    this.summaryHeaderAndGenerateButton = this.shadowRoot.querySelector(".summary-header-and-generate-button");
+  }
   
 }
 customElements.define(Summary.TAG, Summary);
