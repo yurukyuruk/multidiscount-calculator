@@ -12,6 +12,17 @@ const { template } = {
         margin-bottom: 30px;
         cursor: pointer;
     }
+    .clear-button {
+      background-color: white;
+      color: rgb(104,81,166);
+      border: 2px solid rgb(104,81,166);
+      border-radius: 15px;
+      height: 25px;
+      width: 60px;
+      margin-top: 20px;
+      margin-bottom: 30px;
+      cursor: pointer;
+    }
     .generate-button {
       background-color: rgb(104,81,166);
       color: white;

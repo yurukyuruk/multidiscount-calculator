@@ -26,6 +26,10 @@ const { template } = {
         justify-content: space-between;
         padding-top: 20px;
     }
+    .buttons-wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
     @media (min-width: 992px) {
         .discount-definition-section form details summary {
             width: 34vw;
@@ -37,6 +41,7 @@ const { template } = {
             <details>
                 <summary>Discount Definition</summary>
                 <ul></ul>
+                <div class="buttons-wrapper"></div>
             </details>
         </form>
     </section>
@@ -51,7 +56,8 @@ export class DiscountDefinition extends HTMLElement {
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
     this.addInputs();
-    this.addButton();
+    this.addAddButton();
+    this.addClearButton();
   }
   addInputs() {
     const inputsWrapper = document.createElement("div");
@@ -62,16 +68,27 @@ export class DiscountDefinition extends HTMLElement {
     const discountInput = new Input("discount-input-area", "discount", "Discount");
     inputsWrapper.append(discountInput);
   }
-  addButton() {
+  clearInputs() {
+    this.inputsWrapperList.innerHTML = "";
+    this.addInputs();
+  }
+  addAddButton() {
     const button = new Button("+ Add", "add-button");
-    this.details.append(button);
-    button.addEventListener("click", () => {
+    this.buttonsWrapper.append(button);
+    button.button.addEventListener("click", () => {
       this.addInputs();
+    })
+  }
+  addClearButton() {
+    const button = new Button("Clear", "clear-button");
+    this.buttonsWrapper.append(button);
+    button.button.addEventListener("click", () => {
+      this.clearInputs();
     })
   }
   getElementsReferences() {
     this.inputsWrapperList = this.shadowRoot.querySelector("ul");
-    this.details = this.shadowRoot.querySelector("details");
+    this.buttonsWrapper = this.shadowRoot.querySelector(".buttons-wrapper");
   } 
 }
 customElements.define(DiscountDefinition.TAG, DiscountDefinition);
