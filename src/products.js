@@ -14,6 +14,10 @@ const { template } = {
         padding-top: 20px;
         padding-bottom: 30px;
     }
+    ul {
+      padding-left: 0;
+      margin: 0;
+    }
     .inputs-wrapper {
         display: flex;
         justify-content: space-between;
@@ -29,8 +33,7 @@ const { template } = {
         <form action="" method="post">
             <details>
                 <summary>Products</summary>
-                <div class="inputs-wrapper">                            
-                </div>
+                <ul></ul>
             </details>
         </form>
     </section>
@@ -52,17 +55,23 @@ export class Products extends HTMLElement {
   initilizeListeners() {
   }
   addInputs() {
+    const inputsWrapper = document.createElement("div");
+    inputsWrapper.className = "inputs-wrapper";
+    this.inputsWrapperList.append(inputsWrapper);
     const productNameInput = new Input("product-name-input-area", "product-name", "Product name");
-    this.inputsWrapper.append(productNameInput);
+    inputsWrapper.append(productNameInput);
     const priceInput = new Input("price-input-area", "price", "Price");
-    this.inputsWrapper.append(priceInput);
+    inputsWrapper.append(priceInput);
   }
   addButton() {
     const button = new Button("+ Add", "add-button");
     this.details.append(button);
+    button.addEventListener("click", () => {
+      this.addInputs();
+    })
   }
   getElementsReferences() {
-    this.inputsWrapper = this.shadowRoot.querySelector(".inputs-wrapper");
+    this.inputsWrapperList = this.shadowRoot.querySelector("ul");
     this.details = this.shadowRoot.querySelector("details");
   } 
 }
