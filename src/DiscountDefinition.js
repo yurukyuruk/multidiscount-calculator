@@ -41,7 +41,10 @@ const { template } = {
             <details>
                 <summary>Discount Definition</summary>
                 <ul></ul>
-                <div class="buttons-wrapper"></div>
+                <div class="buttons-wrapper">
+                  <element-button></element-button>
+                  <element-button></element-button>
+                </div>
             </details>
         </form>
     </section>
@@ -56,8 +59,8 @@ export class DiscountDefinition extends HTMLElement {
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
     this.addInputs();
-    this.addAddButton();
-    this.addClearButton();
+    this.setAddButton();
+    this.setClearButton();
   }
   addInputs() {
     const inputsWrapper = document.createElement("div");
@@ -67,28 +70,36 @@ export class DiscountDefinition extends HTMLElement {
     inputsWrapper.append(itemCountInput);
     const discountInput = new Input("discount-input-area", "discount", "Discount");
     inputsWrapper.append(discountInput);
+    
   }
+  /*addInput = () => {
+    const discountItemWrapper = document.createElement('li');
+    discountItemWrapper.appendChild(new DiscountItem());
+    this.discountItems.appendChild(discountItemWrapper);
+  }*/
   clearInputs() {
     this.inputsWrapperList.innerHTML = "";
     this.addInputs();
   }
-  addAddButton() {
-    const button = new Button("+ Add", "add-button");
-    this.buttonsWrapper.append(button);
-    button.button.addEventListener("click", () => {
+  setAddButton() {
+    this.addButton.elementClassName = "add-button";
+    this.addButton.elementTextContent = "+ Add";
+    this.addButton.button.addEventListener("click", () => {
       this.addInputs();
     })
   }
-  addClearButton() {
-    const button = new Button("Clear", "clear-button");
-    this.buttonsWrapper.append(button);
-    button.button.addEventListener("click", () => {
+  setClearButton() {
+    this.clearButton.elementClassName = "clear-button";
+    this.clearButton.elementTextContent = "Clear";
+    this.clearButton.button.addEventListener("click", () => {
       this.clearInputs();
     })
   }
   getElementsReferences() {
     this.inputsWrapperList = this.shadowRoot.querySelector("ul");
     this.buttonsWrapper = this.shadowRoot.querySelector(".buttons-wrapper");
+    this.addButton = this.buttonsWrapper.children[0];
+    this.clearButton = this.buttonsWrapper.children[1];
   } 
 }
 customElements.define(DiscountDefinition.TAG, DiscountDefinition);

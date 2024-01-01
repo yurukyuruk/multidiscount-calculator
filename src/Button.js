@@ -40,21 +40,20 @@ const { template } = {
   export class Button extends HTMLElement {
     static TAG = "element-button";
   
-    constructor(text, elementClassName) {
+    constructor() {
       super();
       this.attachShadow({ mode: "open" });
       this.shadowRoot.innerHTML = template;
-      this.initilizeListeners();
-      this.getElementsReferences();
-      this.button.type = "button";
-      this.button.textContent = text;
-      this.button.className = elementClassName;
+      this.getElementsReferences();   
     }
-    initilizeListeners() {
+    set elementClassName(name) {
+      this.button.className = name;
+    }
+    set elementTextContent(text) {
+      this.button.textContent = text;
     }
     getElementsReferences() {
      this.button = this.shadowRoot.querySelector("button");
     }
-    
   }
   customElements.define(Button.TAG, Button);
