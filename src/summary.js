@@ -67,6 +67,7 @@ const { template } = {
   </style>
     <div class="summary-header-and-generate-button">
         <h2>Summary</h2>
+        <element-button></element-button>
     </div>
     <ul class="grouped-products-list">
         <li class="grouped-product">
@@ -106,16 +107,16 @@ export class Summary extends HTMLElement {
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
     this.initilizeListeners();
-    this.addButton();
+    this.setGenerateButton();
   }
   initilizeListeners() {
   }
-  addButton() {
-    const button = new Button("Generate", "generate-button");
-    this.summaryHeaderAndGenerateButton.append(button);
+  setGenerateButton() {
+    this.generateButton.className = "generate-button";
+    this.generateButton.textContent = "Generate";
   }
   getElementsReferences() {
-    this.summaryHeaderAndGenerateButton = this.shadowRoot.querySelector(".summary-header-and-generate-button");
+    this.generateButton = this.shadowRoot.querySelector("element-button");
   }
   
 }

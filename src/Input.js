@@ -1,7 +1,7 @@
 const { template } = {
     template: `
       <style>  
-      .item-count-input-area, .discount-input-area , .product-name-input-area, .price-input-area{
+      div{
         position: relative;
       }
       label {
@@ -15,21 +15,21 @@ const { template } = {
         color: black;
         font-size: 14px;
       }
-      #item-count, #discount, #product-name, #price {
+      input {
         width: 40vw;
         height: 30px;
         border-radius: 5px;
         border: 1px solid rgb(116, 116, 116);
       }
       @media (min-width: 992px) {
-        #item-count, #discount, #product-name, #price {
+        input {
             width: 15vw;
         }
       }
       </style>
       <div>
         <label></label>
-        <input>
+        <input type="text">
       </div>
       `
   };
@@ -42,15 +42,13 @@ const { template } = {
       this.attachShadow({ mode: "open" });
       this.shadowRoot.innerHTML = template;
       this.getElementsReferences();
-      this.div.className = divClassname;
-      this.label.htmlFor = inputId;
-      this.label.textContent = labelText;
-      this.input.type = "text";
-      this.input.id = inputId;
-      this.input.name = inputId;
-      this.initilizeListeners();
     }
-    initilizeListeners() {
+    setInput(name, id, text) {
+      this.div.className = name;
+      this.label.htmlFor = id; 
+      this.label.textContent = text;
+      this.input.id = id;
+      this.input.name = id;
     }
     getElementsReferences() {
      this.div = this.shadowRoot.querySelector("div");

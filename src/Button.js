@@ -46,10 +46,10 @@ const { template } = {
       this.shadowRoot.innerHTML = template;
       this.getElementsReferences();   
     }
-    set elementClassName(name) {
+    set className(name) {
       this.button.className = name;
     }
-    set elementTextContent(text) {
+    set textContent(text) {
       this.button.textContent = text;
     }
     getElementsReferences() {
