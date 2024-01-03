@@ -1,6 +1,6 @@
-import { InputsWrapper } from "./InputsWrapper.js";
-import { Input } from "./Input.js";
+import { DiscountInputsWrapper } from "./DiscountInputsWrapper.js";
 import {Button} from "./Button.js";
+
 const { template } = {
   template: `
     <style>  
@@ -17,6 +17,7 @@ const { template } = {
         width: 90vw;
         padding-top: 20px;
         padding-bottom: 30px;
+        cursor: pointer;
     }
     ul {
       margin: 0;
@@ -36,8 +37,8 @@ const { template } = {
         <form action="" method="post">
             <details>
                 <summary>Discount Definition</summary>
-                <ul class = "inputs-wrappers">
-                  <inputs-wrapper></inputs-wrapper>
+                <ul class = "inputs-wrapper-list">
+                  <discount-inputs-wrapper></discount-inputs-wrapper>
                 </ul>
                 <div class="buttons-wrapper">
                   <element-button class="add-button"></element-button>
@@ -51,39 +52,50 @@ const { template } = {
 
 export class DiscountDefinition extends HTMLElement {
   static TAG = "discount-definition";
+  static DISCOUNT_INPUT_INFORMATION = ["item-count-input-area", "item-count", "Item count", "discount-input-area", "discount", "Discount"];
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
-    this.discountInputInformation = ["item-count-input-area", "item-count", "Item count", "discount-input-area", "discount", "Discount"];
-    this.inputsWrapper.setInputs(...this.discountInputInformation);
+    this.discountInputsWrapper.setInputs(...DiscountDefinition.DISCOUNT_INPUT_INFORMATION);
     this.setAddButton();
     this.setClearButton();
+    this.initializeListeners();
   }
   addNewInputs() {
-      const newInputsWrapper = new InputsWrapper();
-      newInputsWrapper.setInputs(...this.discountInputInformation); 
-      this.inputsWrappers.append(newInputsWrapper);
+      const newInputsWrapper = new DiscountInputsWrapper();
+      newInputsWrapper.setInputs(...DiscountDefinition.DISCOUNT_INPUT_INFORMATION); 
+      this.inputsWrapperList.append(newInputsWrapper);
   }
   setAddButton() {
     this.addButton.className = "add-button";
     this.addButton.textContent = "+ Add";
-    this.addButton.addEventListener("click", () => {
-      this.addNewInputs(); 
-    })
   }
   setClearButton() {
     this.clearButton.className = "clear-button";
     this.clearButton.textContent = "Clear";
+  }
+  initializeListeners() {
+    this.addButton.addEventListener("click", () => {
+      this.addNewInputs(); 
+    })
     this.clearButton.addEventListener("click", () => {
-      this.inputsWrappers.innerHTML = "";
+      this.inputsWrapperList.innerHTML = "";
       this.addNewInputs();
     })
   }
+  getDiscountInputValues() {
+    const discountInputValues = [];
+    const inputsWrappers = this.shadowRoot.querySelectorAll("discount-inputs-wrapper");
+    inputsWrappers.forEach((wrapper) => {
+      discountInputValues.push(wrapper.getInputValues());
+    })
+    return discountInputValues;
+  }
   getElementsReferences() {
-    this.inputsWrappers = this.shadowRoot.querySelector(".inputs-wrappers");
-    this.inputsWrapper = this.shadowRoot.querySelector("inputs-wrapper");
+    this.inputsWrapperList = this.shadowRoot.querySelector(".inputs-wrapper-list");
+    this.discountInputsWrapper = this.shadowRoot.querySelector("discount-inputs-wrapper");
     this.buttonsWrapper = this.shadowRoot.querySelector(".buttons-wrapper");
     this.addButton = this.shadowRoot.querySelector(".add-button");
     this.clearButton = this.shadowRoot.querySelector(".clear-button");

@@ -29,15 +29,15 @@ const { template } = {
       </style>
       <div>
         <label></label>
-        <input type="text">
+        <input type="number">
       </div>
       `
   };
   
-  export class Input extends HTMLElement {
-    static TAG = "element-input";
+  export class NumberInput extends HTMLElement {
+    static TAG = "number-input";
   
-    constructor(divClassname, inputId, labelText) {
+    constructor() {
       super();
       this.attachShadow({ mode: "open" });
       this.shadowRoot.innerHTML = template;
@@ -50,6 +50,10 @@ const { template } = {
       this.input.id = id;
       this.input.name = id;
     }
+    get value() {
+      this.input.value = this.input.value.replace(/[^0-9.]/g, '')
+      return this.input.value;
+    }
     getElementsReferences() {
      this.div = this.shadowRoot.querySelector("div");
      this.label = this.shadowRoot.querySelector("label");
@@ -57,4 +61,4 @@ const { template } = {
     }
     
   }
-  customElements.define(Input.TAG, Input);
+  customElements.define(NumberInput.TAG, NumberInput);
