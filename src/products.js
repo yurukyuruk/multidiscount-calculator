@@ -70,7 +70,7 @@ export class Products extends HTMLElement {
     this.clearButton.className = "clear-button";
     this.clearButton.textContent = "Clear";
   }
-  getDiscountInputValues() {
+  getProductInputValues() {
     const productInputValues = [];
     const inputsWrappers = this.shadowRoot.querySelectorAll("product-inputs-wrapper");
     inputsWrappers.forEach((wrapper) => {

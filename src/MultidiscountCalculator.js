@@ -33,26 +33,19 @@ const { template } = {
   
   export class MultidiscountCalculator extends HTMLElement {
     static TAG = "multidiscount-calculator";
-    static LIST_GENERATOR = new ProductGrouping();
+    static PRODUCT_GROUPING = new ProductGrouping();
     constructor() {
       super();
       this.attachShadow({ mode: "open" });
       this.shadowRoot.innerHTML = template;
       this.getElementsReferences();  
-      this.getDiscountDefinitionInputValues(); 
-      this.getProductInputValues(); 
+      this.initializeListeners(); 
     }
-    getDiscountDefinitionInputValues() {
+    initializeListeners() {
       this.summary.generateButton.addEventListener("click", () => {
-        MultidiscountCalculator.LIST_GENERATOR.useInputData(this.discountDefinition.getDiscountInputValues());    
+        MultidiscountCalculator.PRODUCT_GROUPING.useInputData(this.discountDefinition.getDiscountInputValues(), this.products.getProductInputValues());    
       });
     }
-    getProductInputValues() {
-      this.summary.generateButton.addEventListener("click", () => {
-        MultidiscountCalculator.LIST_GENERATOR.useInputData(this.products.getDiscountInputValues());    
-      });
-    }
-    
     getElementsReferences() {
      this.discountDefinition = this.shadowRoot.querySelector("discount-definition");
      this.products = this.shadowRoot.querySelector("products-element");
