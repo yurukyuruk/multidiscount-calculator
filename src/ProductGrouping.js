@@ -25,9 +25,8 @@
             productsWithDiscountAmountsDependingOnAllItemAmounts.push(productsWithDiscountAmountsDependingOnItemAmount);
         });
         //console.log(productsWithDiscountAmountsDependingOnAllItemAmounts);
-
+        let productsAndTheirProportionalDiscountForAnItemCount = [];
         for(let i = 0; i < productsWithDiscountAmountsDependingOnAllItemAmounts.length; i++) {
-            let productsAndTheirProportionalDiscountForAnItemCount = [];
             for(let j = 0; j < productsWithDiscountAmountsDependingOnAllItemAmounts[i].length; j++) {
                 let productsAndTheirProportionalDiscount = {
                     names: [], 
@@ -55,9 +54,42 @@
                     productsAndTheirProportionalDiscountForAnItemCount.push(productsAndTheirProportionalDiscount); 
                 }               
             }
-
-            console.log(productsAndTheirProportionalDiscountForAnItemCount);
         }
+        //console.log(productsAndTheirProportionalDiscountForAnItemCount);
+        let sortedProductsAndTheirProportionalDiscountForAnItemCount = productsAndTheirProportionalDiscountForAnItemCount.sort((a, b) => {
+            return b.propotionalDiscount - a.propotionalDiscount;
+        });
+
+        const finalGroupsAndProportionOfTheirDiscount = [sortedProductsAndTheirProportionalDiscountForAnItemCount[0]];
+
+        const productsNamesSortedFromHighestPrice = productsInformationSortedFromHighestPrice.map(([a, b]) => {
+            return a;
+        })
+        console.log(productsNamesSortedFromHighestPrice);
+
+       let finalGroupProductNames = [...sortedProductsAndTheirProportionalDiscountForAnItemCount[0].names];
+
+       let iterated = [];
+        
+        let i = 0;
+    if(sortedProductsAndTheirProportionalDiscountForAnItemCount[0].names.length !== productsNamesSortedFromHighestPrice.length) {
+        do{  
+            function filterObjectsByCondition(objArray, conditionArray, property) {
+                return objArray.filter(obj => !obj[property].some(item => conditionArray.includes(item)));
+            }
+            // Example usage
+            iterated = filterObjectsByCondition(sortedProductsAndTheirProportionalDiscountForAnItemCount, finalGroupProductNames, 'names');
+            //filter array
+            iterated[0].names.forEach((name) => {
+                finalGroupProductNames.push(name);
+            });
+            finalGroupsAndProportionOfTheirDiscount.push(iterated[0]);
+            iterated = [];
+        i = finalGroupProductNames.length;
+        } while(i < productsNamesSortedFromHighestPrice.length);
     }
+    
+        console.log(finalGroupsAndProportionOfTheirDiscount);
+        }
   }
   customElements.define(ProductGrouping.TAG, ProductGrouping);
