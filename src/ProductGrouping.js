@@ -8,13 +8,10 @@
             return a[0] - b[0];
         })
         //console.log(discountDefinitionSortedFromLowestItem); 
-        
-
         const productsInformationSortedFromHighestPrice = productInputValues.sort((a, b) => {
             return b[1] - a[1];
         });
         //console.log(productsInformationSortedFromHighestPrice);
-
         const productsWithDiscountAmountsDependingOnAllItemAmounts = [];
         discountDefinitionSortedFromLowestItem.forEach((discountDefinitionRow) => {
             let productsWithDiscountAmountsDependingOnItemAmount = [];
@@ -45,11 +42,11 @@
                     }
                 }
                 if(productsAndTheirProportionalDiscount.names.length ===  Number(discountDefinitionSortedFromLowestItem[i][0])) {
-                    let discountsForAnItemCountTotal = 0;
+                    let discountsForAnItemCountTotal = [];
                     discountsForAnItemCount.forEach(num => {
-                        discountsForAnItemCountTotal += Number(num);
+                        discountsForAnItemCountTotal.push(Number(num));
                     })
-                    let propotionalDiscountForAnItemCount = discountsForAnItemCountTotal / productsAndTheirProportionalDiscount.names.length;
+                    let propotionalDiscountForAnItemCount = Math.min(...discountsForAnItemCountTotal);
                     productsAndTheirProportionalDiscount.propotionalDiscount = propotionalDiscountForAnItemCount;
                     productsAndTheirProportionalDiscountForAnItemCount.push(productsAndTheirProportionalDiscount); 
                 }               
@@ -59,27 +56,20 @@
         let sortedProductsAndTheirProportionalDiscountForAnItemCount = productsAndTheirProportionalDiscountForAnItemCount.sort((a, b) => {
             return b.propotionalDiscount - a.propotionalDiscount;
         });
-
         const finalGroupsAndProportionOfTheirDiscount = [sortedProductsAndTheirProportionalDiscountForAnItemCount[0]];
-
         const productsNamesSortedFromHighestPrice = productsInformationSortedFromHighestPrice.map(([a, b]) => {
             return a;
         })
-        console.log(productsNamesSortedFromHighestPrice);
-
+        //console.log(productsNamesSortedFromHighestPrice);
        let finalGroupProductNames = [...sortedProductsAndTheirProportionalDiscountForAnItemCount[0].names];
-
-       let iterated = [];
-        
+       let iterated = [];  
         let i = 0;
     if(sortedProductsAndTheirProportionalDiscountForAnItemCount[0].names.length !== productsNamesSortedFromHighestPrice.length) {
         do{  
             function filterObjectsByCondition(objArray, conditionArray, property) {
                 return objArray.filter(obj => !obj[property].some(item => conditionArray.includes(item)));
             }
-            // Example usage
-            iterated = filterObjectsByCondition(sortedProductsAndTheirProportionalDiscountForAnItemCount, finalGroupProductNames, 'names');
-            //filter array
+            iterated = filterObjectsByCondition(sortedProductsAndTheirProportionalDiscountForAnItemCount, finalGroupProductNames, 'names');       
             iterated[0].names.forEach((name) => {
                 finalGroupProductNames.push(name);
             });
