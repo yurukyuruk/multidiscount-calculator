@@ -49,14 +49,12 @@ const { template } = {
       </style>
       <li class="grouped-product">
             <div class="products-list-part">
-                <h2>2 Products, 35% Discount</h2>
+                <h2 class="products-summary"></h2>
                 <ul>
-                    <li>Fridge</li>
-                    <li>Oven</li>
                 </ul>
             </div>
             <div class="savings-part">
-                <h2>SAVINGS: 1750</h2>
+                <h2 class="savings"></h2>
             </div>
       </li>
       `
@@ -71,8 +69,24 @@ const { template } = {
       this.shadowRoot.innerHTML = template;
       this.getElementsReferences();   
     }
+    setProductListSummaryHeader(numberOfProducts, discountRatio) {
+      this.productListSummaryHeader.innerHTML = `${numberOfProducts} Products, ${discountRatio}% Discount`;
+    }
+    createGroupedProductAndSetText(textArray) {
+      textArray.forEach(text => {
+        const eachGroupedProduct = document.createElement("li");
+        text = text[0].toUpperCase() + text.slice(1).toLowerCase();
+        eachGroupedProduct.innerHTML = text;
+        this.groupedPreductList.append(eachGroupedProduct);
+      });
+    }
+    setSavingsText(text) {
+      this.savings.innerHTML = `SAVINGS: ${text}`;
+    }
     getElementsReferences() {
-
+      this.groupedPreductList = this.shadowRoot.querySelector("ul");
+      this.savings = this.shadowRoot.querySelector(".savings");
+      this.productListSummaryHeader = this.shadowRoot.querySelector(".products-summary");
     }
   }
   customElements.define(ProductsAndSavingsListItem.TAG, ProductsAndSavingsListItem);

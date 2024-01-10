@@ -27,6 +27,7 @@
             for(let j = 0; j < productsWithDiscountAmountsDependingOnAllItemAmounts[i].length; j++) {
                 let productsAndTheirProportionalDiscount = {
                     names: [], 
+                    discountRatio: 0,
                     propotionalDiscount: 0 
                 };
                 let discountsForAnItemCount = [];
@@ -64,7 +65,7 @@
        let finalGroupProductNames = [...sortedProductsAndTheirProportionalDiscountForAnItemCount[0].names];
        let iterated = [];  
         let i = 0;
-    if(sortedProductsAndTheirProportionalDiscountForAnItemCount[0].names.length !== productsNamesSortedFromHighestPrice.length) {
+    if(productsNamesSortedFromHighestPrice.length - sortedProductsAndTheirProportionalDiscountForAnItemCount[0].names.length >= Number(discountDefinitionSortedFromLowestItem[0][0])) {
         do{  
             function filterObjectsByCondition(objArray, conditionArray, property) {
                 return objArray.filter(obj => !obj[property].some(item => conditionArray.includes(item)));
@@ -78,8 +79,17 @@
         i = finalGroupProductNames.length;
         } while(i < productsNamesSortedFromHighestPrice.length && (productsNamesSortedFromHighestPrice.length - i > Number(discountDefinitionSortedFromLowestItem[0][0])));
     }
+
+    finalGroupsAndProportionOfTheirDiscount.forEach((finalGroup) => {
+       const discountInformation = discountDefinitionSortedFromLowestItem.find((discount) => {
+            return finalGroup.names.length == discount[0];
+        });
+        finalGroup.discountRatio = Number(discountInformation[1]);
+    })
     
+
         console.log(finalGroupsAndProportionOfTheirDiscount);
-        }
+        return finalGroupsAndProportionOfTheirDiscount;
+    }  
   }
   customElements.define(ProductGrouping.TAG, ProductGrouping);

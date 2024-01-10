@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1704877764657" clover="3.2.0">
+  <project timestamp="1704877764657" name="All files">
+    <metrics statements="53" coveredstatements="53" conditionals="8" coveredconditionals="7" methods="12" coveredmethods="12" elements="73" coveredelements="72" complexity="0" loc="53" ncloc="53" packages="1" files="1" classes="1"/>
+    <file name="ProductGrouping.js" path="C:\Users\ASLI\Desktop\multidiscount-calculator\src\ProductGrouping.js">
+      <metrics statements="53" coveredstatements="53" conditionals="8" coveredconditionals="7" methods="12" coveredmethods="12"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="7" count="3" type="stmt"/>
+      <line num="8" count="9" type="stmt"/>
+      <line num="11" count="3" type="stmt"/>
+      <line num="12" count="10" type="stmt"/>
+      <line num="15" count="3" type="stmt"/>
+      <line num="16" count="3" type="stmt"/>
+      <line num="17" count="8" type="stmt"/>
+      <line num="18" count="8" type="stmt"/>
+      <line num="19" count="35" type="stmt"/>
+      <line num="20" count="35" type="stmt"/>
+      <line num="22" count="8" type="stmt"/>
+      <line num="25" count="3" type="stmt"/>
+      <line num="26" count="3" type="stmt"/>
+      <line num="27" count="8" type="stmt"/>
+      <line num="28" count="35" type="stmt"/>
+      <line num="32" count="35" type="stmt"/>
+      <line num="33" count="35" type="stmt"/>
+      <line num="34" count="35" type="stmt"/>
+      <line num="35" count="35" type="stmt"/>
+      <line num="36" count="54" type="cond" truecount="2" falsecount="0"/>
+      <line num="37" count="36" type="stmt"/>
+      <line num="38" count="36" type="stmt"/>
+      <line num="40" count="18" type="stmt"/>
+      <line num="41" count="18" type="stmt"/>
+      <line num="44" count="35" type="cond" truecount="2" falsecount="0"/>
+      <line num="45" count="19" type="stmt"/>
+      <line num="46" count="19" type="stmt"/>
+      <line num="47" count="49" type="stmt"/>
+      <line num="49" count="19" type="stmt"/>
+      <line num="50" count="19" type="stmt"/>
+      <line num="51" count="19" type="stmt"/>
+      <line num="56" count="3" type="stmt"/>
+      <line num="57" count="33" type="stmt"/>
+      <line num="59" count="3" type="stmt"/>
+      <line num="60" count="3" type="stmt"/>
+      <line num="61" count="13" type="stmt"/>
+      <line num="64" count="3" type="stmt"/>
+      <line num="65" count="3" type="stmt"/>
+      <line num="66" count="3" type="stmt"/>
+      <line num="67" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="68" count="2" type="stmt"/>
+      <line num="70" count="15" type="stmt"/>
+      <line num="72" count="2" type="stmt"/>
+      <line num="73" count="2" type="stmt"/>
+      <line num="74" count="2" type="stmt"/>
+      <line num="76" count="1" type="stmt"/>
+      <line num="77" count="1" type="stmt"/>
+      <line num="78" count="1" type="stmt"/>
+      <line num="82" count="2" type="stmt"/>
+      <line num="83" count="2" type="stmt"/>
+      <line num="86" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>

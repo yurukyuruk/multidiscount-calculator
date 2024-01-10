@@ -30,8 +30,6 @@ const { template } = {
         <element-button></element-button>
     </div>
     <ul class="products-and-savings-list">
-      <products-and-savings-list-item></products-and-savings-list-item>
-      <products-and-savings-list-item></products-and-savings-list-item>
     </ul>
     `
 };
@@ -54,8 +52,19 @@ export class Summary extends HTMLElement {
     this.generateButton.className = "generate-button";
     this.generateButton.textContent = "Generate";
   }
+  clearProductsAndSavingListItems() {
+    this.productsAndSavingList.innerHTML = "";
+  }
+  createProductsAndSavingsListItem(discountRatio, groupedProductText, savingsText) {
+    const newProductsAndSavingsListItem = new ProductsAndSavingsListItem(); 
+    newProductsAndSavingsListItem.setProductListSummaryHeader(groupedProductText.length, discountRatio);
+    newProductsAndSavingsListItem.createGroupedProductAndSetText(groupedProductText);
+    newProductsAndSavingsListItem.setSavingsText(savingsText);
+    this.productsAndSavingList.append(newProductsAndSavingsListItem);
+  }
   getElementsReferences() {
     this.generateButton = this.shadowRoot.querySelector("element-button");
+    this.productsAndSavingList = this.shadowRoot.querySelector(".products-and-savings-list");
   }
   
 }

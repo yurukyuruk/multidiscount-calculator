@@ -43,7 +43,11 @@ const { template } = {
     }
     initializeListeners() {
       this.summary.generateButton.addEventListener("click", () => {
-        MultidiscountCalculator.PRODUCT_GROUPING.useInputData(this.discountDefinition.getDiscountInputValues(), this.products.getProductInputValues());    
+        this.summary.clearProductsAndSavingListItems();
+        const finalGroupsAndTheirDiscounts =  MultidiscountCalculator.PRODUCT_GROUPING.useInputData(this.discountDefinition.getDiscountInputValues(), this.products.getProductInputValues());  
+        finalGroupsAndTheirDiscounts.forEach((finalGroup) => {
+          this.summary.createProductsAndSavingsListItem(finalGroup.discountRatio, finalGroup.names, finalGroup.propotionalDiscount);
+        })
       });
     }
     getElementsReferences() {
