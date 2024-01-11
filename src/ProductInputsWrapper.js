@@ -1,5 +1,6 @@
 import { NumberInput } from "./NumberInput.js";
 import { TextInput } from "./TextInput.js";
+import {Button} from "./Button.js";
 
 const { template } = {
   template: `
@@ -7,11 +8,13 @@ const { template } = {
     .inputs-wrapper {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding-top: 20px;
     }
     </style>
     <li class="inputs-wrapper">
         <text-input class="first-input"></text-input>
+        <element-button class="delete-button"></element-button>
         <number-input class="second-input"></number-input>
     </li>
     `
@@ -25,6 +28,11 @@ export class ProductInputsWrapper extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
+    this.deleteButton.textContent = "-";
+    this.deleteButton.className = "delete-button";
+  }
+  getDeleteButton() {
+    return this.deleteButton;
   }
   setInputs(name1, id1, text1, name2, id2, text2) {
     this.firstInput.setInput(name1, id1, text1);
@@ -36,6 +44,7 @@ export class ProductInputsWrapper extends HTMLElement {
   getElementsReferences() {
     this.discountInputsWrapper = this.shadowRoot.querySelector(".discount-inputs-wrapper");
     this.firstInput = this.shadowRoot.querySelector(".first-input");
+    this.deleteButton = this.shadowRoot.querySelector(".delete-button");
     this.secondInput = this.shadowRoot.querySelector(".second-input");
   }
   

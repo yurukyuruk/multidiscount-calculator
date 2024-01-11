@@ -12,6 +12,16 @@ const { template } = {
         margin-bottom: 30px;
         cursor: pointer;
     }
+    .delete-button {
+      background-color: white;
+      color: rgb(104,81,166);
+      border: 2px solid rgb(104,81,166);
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;  
+      cursor: pointer;
+    }
     .clear-button {
       background-color: white;
       color: rgb(104,81,166);

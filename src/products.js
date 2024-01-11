@@ -51,15 +51,24 @@ export class Products extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
+    this.initializeListeners();
     this.productsInputInformation = ["product-name-input-area", "product-name", "Product name", "price-input-area", "price", "Price"];
     this.productInputsWrapper.setInputs(...this.productsInputInformation);
     this.setAddButton();
     this.setClearButton();
-    this.initializeListeners();
+    this.setEventListenerToDeleteButtonOfFirstInput();
+  }
+  setEventListenerToDeleteButtonOfFirstInput() {
+    this.productInputsWrapper.getDeleteButton().addEventListener("click", () => {
+      this.productInputsWrapper.remove();
+    });
   }
   addNewInputs() {
     const newInputsWrapper = new ProductInputsWrapper();
     newInputsWrapper.setInputs(...this.productsInputInformation); 
+    newInputsWrapper.getDeleteButton().addEventListener("click", () => {
+      newInputsWrapper.remove();
+    });
     this.inputsWrapperList.append(newInputsWrapper);
   }
   setAddButton() {

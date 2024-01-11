@@ -58,14 +58,23 @@ export class DiscountDefinition extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
+    this.initializeListeners();
     this.discountInputsWrapper.setInputs(...DiscountDefinition.DISCOUNT_INPUT_INFORMATION);
     this.setAddButton();
     this.setClearButton();
-    this.initializeListeners();
+    this.setEventListenerToDeleteButtonOfFirstInput();
+  }
+  setEventListenerToDeleteButtonOfFirstInput() {
+    this.discountInputsWrapper.getDeleteButton().addEventListener("click", () => {
+      this.discountInputsWrapper.remove();
+    });
   }
   addNewInputs() {
       const newInputsWrapper = new DiscountInputsWrapper();
-      newInputsWrapper.setInputs(...DiscountDefinition.DISCOUNT_INPUT_INFORMATION); 
+      newInputsWrapper.setInputs(...DiscountDefinition.DISCOUNT_INPUT_INFORMATION);
+      newInputsWrapper.getDeleteButton().addEventListener("click", () => {
+        newInputsWrapper.remove();
+      });
       this.inputsWrapperList.append(newInputsWrapper);
   }
   setAddButton() {
