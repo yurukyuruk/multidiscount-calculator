@@ -77,7 +77,7 @@
             finalGroupsAndProportionOfTheirDiscount.push(iterated[0]);
             iterated = [];
         i = finalGroupProductNames.length;
-        } while(i < productsNamesSortedFromHighestPrice.length && (productsNamesSortedFromHighestPrice.length - i > Number(discountDefinitionSortedFromLowestItem[0][0])));
+        } while(i < productsNamesSortedFromHighestPrice.length && (productsNamesSortedFromHighestPrice.length - i >= Number(discountDefinitionSortedFromLowestItem[0][0])));
     }
 
     finalGroupsAndProportionOfTheirDiscount.forEach((finalGroup) => {
