@@ -13,8 +13,8 @@ const { template } = {
     }
     </style>
     <li class="inputs-wrapper">
-        <text-input class="first-input"></text-input>
         <element-button class="delete-button"></element-button>
+        <text-input class="first-input"></text-input>
         <number-input class="second-input"></number-input>
     </li>
     `

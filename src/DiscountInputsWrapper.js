@@ -12,8 +12,8 @@ const { template } = {
     }
     </style>
     <li class="inputs-wrapper">
-        <number-input class="first-input"></number-input>
         <element-button class="delete-button"></element-button>
+        <number-input class="first-input"></number-input>
         <number-input class="second-input"></number-input>
     </li>
     `

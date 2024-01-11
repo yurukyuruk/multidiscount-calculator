@@ -1,6 +1,6 @@
 import {ProductGrouping} from "../src/ProductGrouping.js";
 
-describe("ProductGrouping", () => {
+describe(ProductGrouping.name, () => {
     const validator = new ProductGrouping();
   
     test("check if returns expected object 1", () => {

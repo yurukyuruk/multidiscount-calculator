@@ -19,7 +19,7 @@ const { template } = {
       justify-content: center;
       width: 20px;
       height: 20px;
-      border-radius: 6px;  
+      border-radius: 5px;  
       cursor: pointer;
     }
     .clear-button {

@@ -43,16 +43,16 @@ const { template } = {
       this.shadowRoot.innerHTML = template;
       this.getElementsReferences();
     }
+    get value() {
+      this.input.value = this.input.value.replace(/[^0-9.]/g, '')
+      return this.input.value;
+    }
     setInput(name, id, text) {
       this.div.className = name;
       this.label.htmlFor = id; 
       this.label.textContent = text;
       this.input.id = id;
       this.input.name = id;
-    }
-    get value() {
-      this.input.value = this.input.value.replace(/[^0-9.]/g, '')
-      return this.input.value;
     }
     getElementsReferences() {
      this.div = this.shadowRoot.querySelector("div");

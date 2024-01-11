@@ -43,15 +43,18 @@ const { template } = {
       this.shadowRoot.innerHTML = template;
       this.getElementsReferences();
     }
+    get value() {
+      return this.input.value;
+    }
+    /*setValidationRule(validationRule) {
+
+    }*/
     setInput(name, id, text) {
       this.div.className = name;
       this.label.htmlFor = id; 
       this.label.textContent = text;
       this.input.id = id;
       this.input.name = id;
-    }
-    get value() {
-      return this.input.value;
     }
     getElementsReferences() {
      this.div = this.shadowRoot.querySelector("div");
