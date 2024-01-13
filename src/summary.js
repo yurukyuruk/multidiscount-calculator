@@ -42,11 +42,10 @@ export class Summary extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
-    this.initilizeListeners();
     this.setGenerateButton();
   }
-  initilizeListeners() {
-
+  addEventListenerToGenerateButton(callback) {
+    this.generateButton.addEventListener("click", callback);
   }
   setGenerateButton() {
     this.generateButton.className = "generate-button";

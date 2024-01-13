@@ -39,16 +39,14 @@ const { template } = {
       this.attachShadow({ mode: "open" });
       this.shadowRoot.innerHTML = template;
       this.getElementsReferences();  
-      this.initializeListeners(); 
+      this.summary.addEventListenerToGenerateButton(this.generateSummaryListItems.bind(this));
     }
-    initializeListeners() {
-      this.summary.generateButton.addEventListener("click", () => {
-        this.summary.clearProductsAndSavingListItems();
+    generateSummaryListItems() {
+      this.summary.clearProductsAndSavingListItems();
         const finalGroupsAndTheirDiscounts =  MultidiscountCalculator.PRODUCT_GROUPING.useInputData(this.discountDefinition.getDiscountInputValues(), this.products.getProductInputValues());  
         finalGroupsAndTheirDiscounts.forEach((finalGroup) => {
           this.summary.createProductsAndSavingsListItem(finalGroup.discountRatio, finalGroup.names, finalGroup.propotionalDiscount);
         })
-      });
     }
     getElementsReferences() {
      this.discountDefinition = this.shadowRoot.querySelector("discount-definition");

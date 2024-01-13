@@ -16,7 +16,7 @@ const { template } = {
         font-size: 20px;
         width: 90vw;
         padding-top: 20px;
-        padding-bottom: 30px;
+        padding-bottom: 10px;
         cursor: pointer;
     }
     ul {
@@ -65,16 +65,12 @@ export class DiscountDefinition extends HTMLElement {
     this.setEventListenerToDeleteButtonOfFirstInput();
   }
   setEventListenerToDeleteButtonOfFirstInput() {
-    this.discountInputsWrapper.getDeleteButton().addEventListener("click", () => {
-      this.discountInputsWrapper.remove();
-    });
+    this.discountInputsWrapper.addEventListenerToDeleteButton(() => {this.discountInputsWrapper.remove().bind(this)});
   }
   addNewInputs() {
       const newInputsWrapper = new DiscountInputsWrapper();
       newInputsWrapper.setInputs(...DiscountDefinition.DISCOUNT_INPUT_INFORMATION);
-      newInputsWrapper.getDeleteButton().addEventListener("click", () => {
-        newInputsWrapper.remove();
-      });
+      newInputsWrapper.addEventListenerToDeleteButton(() => {newInputsWrapper.remove()});
       this.inputsWrapperList.append(newInputsWrapper);
   }
   setAddButton() {

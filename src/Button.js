@@ -1,34 +1,34 @@
 const { template } = {
     template: `
       <style>  
+      .delete-button {
+        background-color: white;
+        color: rgb(104,81,166);
+        border: 2px solid rgb(104,81,166);
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;  
+        cursor: pointer;
+      }
       .add-button {
         background-color: rgb(104,81,166);
         color: white;
         border: none;
         border-radius: 15px;
-        height: 25px;
-        width: 60px;
+        height: 30px;
+        width: 80px;
         margin-top: 20px;
         margin-bottom: 30px;
         cursor: pointer;
-    }
-    .delete-button {
-      background-color: white;
-      color: rgb(104,81,166);
-      border: 2px solid rgb(104,81,166);
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      border-radius: 5px;  
-      cursor: pointer;
     }
     .clear-button {
       background-color: white;
       color: rgb(104,81,166);
       border: 2px solid rgb(104,81,166);
       border-radius: 15px;
-      height: 25px;
-      width: 60px;
+      height: 30px;
+      width: 80px;
       margin-top: 20px;
       margin-bottom: 30px;
       cursor: pointer;

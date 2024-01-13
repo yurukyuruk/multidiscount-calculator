@@ -9,7 +9,7 @@ const { template } = {
         font-size: 20px;
         width: 90vw;
         padding-top: 20px;
-        padding-bottom: 30px;
+        padding-bottom: 10px;
         cursor: pointer;
     }
     ul {
@@ -59,16 +59,12 @@ export class Products extends HTMLElement {
     this.setEventListenerToDeleteButtonOfFirstInput();
   }
   setEventListenerToDeleteButtonOfFirstInput() {
-    this.productInputsWrapper.getDeleteButton().addEventListener("click", () => {
-      this.productInputsWrapper.remove();
-    });
+    this.productInputsWrapper.addEventListenerToDeleteButton(() => {this.productInputsWrapper.remove().bind(this)});
   }
   addNewInputs() {
     const newInputsWrapper = new ProductInputsWrapper();
     newInputsWrapper.setInputs(...this.productsInputInformation); 
-    newInputsWrapper.getDeleteButton().addEventListener("click", () => {
-      newInputsWrapper.remove();
-    });
+    newInputsWrapper.addEventListenerToDeleteButton(() => {newInputsWrapper.remove()});
     this.inputsWrapperList.append(newInputsWrapper);
   }
   setAddButton() {

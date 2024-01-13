@@ -30,8 +30,8 @@ export class DiscountInputsWrapper extends HTMLElement {
     this.deleteButton.textContent = "-";
     this.deleteButton.className = "delete-button";
   }
-  getDeleteButton() {
-    return this.deleteButton;
+  addEventListenerToDeleteButton(callback) {
+    this.deleteButton.addEventListener("click", callback);
   }
   setInputs(name1, id1, text1, name2, id2, text2) {
     this.firstInput.setInput(name1, id1, text1);
