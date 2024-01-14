@@ -1,5 +1,5 @@
 const { template } = {
-    template: `
+  template: `
       <style>  
       .delete-button {
         background-color: white;
@@ -45,26 +45,26 @@ const { template } = {
     }
       </style>
       <button type="button"></button>
-      `
-  };
-  
-  export class Button extends HTMLElement {
-    static TAG = "element-button";
-  
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.shadowRoot.innerHTML = template;
-      this.getElementsReferences();   
-    }
-    set className(name) {
-      this.button.className = name;
-    }
-    set textContent(text) {
-      this.button.textContent = text;
-    }
-    getElementsReferences() {
-     this.button = this.shadowRoot.querySelector("button");
-    }
+      `,
+};
+
+export class Button extends HTMLElement {
+  static TAG = 'element-button';
+
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.innerHTML = template;
+    this.getElementsReferences();
   }
-  customElements.define(Button.TAG, Button);
+  set className(name) {
+    this.button.className = name;
+  }
+  set textContent(text) {
+    this.button.textContent = text;
+  }
+  getElementsReferences() {
+    this.button = this.shadowRoot.querySelector('button');
+  }
+}
+customElements.define(Button.TAG, Button);

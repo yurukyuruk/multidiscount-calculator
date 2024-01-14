@@ -1,2 +1,1 @@
-import { MultidiscountCalculator } from "./src/MultidiscountCalculator.js";
-
+import { MultidiscountCalculator } from './src/MultidiscountCalculator.js';

@@ -1,6 +1,5 @@
-import { Button } from "./Button.js";
-import { ProductsAndSavingsListItem } from "./ProductsAndSavingsListItem.js";
-
+import { Button } from './Button.js';
+import { ProductsAndSavingsListItem } from './ProductsAndSavingsListItem.js';
 
 const { template } = {
   template: `
@@ -31,40 +30,39 @@ const { template } = {
     </div>
     <ul class="products-and-savings-list">
     </ul>
-    `
+    `,
 };
 
 export class Summary extends HTMLElement {
-  static TAG = "element-summary";
+  static TAG = 'element-summary';
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
     this.setGenerateButton();
   }
   addEventListenerToGenerateButton(callback) {
-    this.generateButton.addEventListener("click", callback);
+    this.generateButton.addEventListener('click', callback);
   }
   setGenerateButton() {
-    this.generateButton.className = "generate-button";
-    this.generateButton.textContent = "Generate";
+    this.generateButton.className = 'generate-button';
+    this.generateButton.textContent = 'Generate';
   }
   clearProductsAndSavingListItems() {
-    this.productsAndSavingList.innerHTML = "";
+    this.productsAndSavingList.innerHTML = '';
   }
   createProductsAndSavingsListItem(discountRatio, groupedProductText, savingsText) {
-    const newProductsAndSavingsListItem = new ProductsAndSavingsListItem(); 
+    const newProductsAndSavingsListItem = new ProductsAndSavingsListItem();
     newProductsAndSavingsListItem.setProductListSummaryHeader(groupedProductText.length, discountRatio);
     newProductsAndSavingsListItem.createGroupedProductAndSetText(groupedProductText);
     newProductsAndSavingsListItem.setSavingsText(savingsText);
     this.productsAndSavingList.append(newProductsAndSavingsListItem);
   }
   getElementsReferences() {
-    this.generateButton = this.shadowRoot.querySelector("element-button");
-    this.productsAndSavingList = this.shadowRoot.querySelector(".products-and-savings-list");
+    this.generateButton = this.shadowRoot.querySelector('element-button');
+    this.productsAndSavingList = this.shadowRoot.querySelector('.products-and-savings-list');
   }
-  
 }
 customElements.define(Summary.TAG, Summary);

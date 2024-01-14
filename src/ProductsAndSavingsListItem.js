@@ -1,5 +1,5 @@
 const { template } = {
-    template: `
+  template: `
       <style>  
       .grouped-product {
         display: flex;
@@ -57,36 +57,36 @@ const { template } = {
                 <h2 class="savings"></h2>
             </div>
       </li>
-      `
-  };
-  
-  export class ProductsAndSavingsListItem extends HTMLElement {
-    static TAG = "products-and-savings-list-item";
-  
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.shadowRoot.innerHTML = template;
-      this.getElementsReferences();   
-    }
-    setProductListSummaryHeader(numberOfProducts, discountRatio) {
-      this.productListSummaryHeader.innerHTML = `${numberOfProducts} Products, ${discountRatio}% Discount`;
-    }
-    createGroupedProductAndSetText(textArray) {
-      textArray.forEach(text => {
-        const eachGroupedProduct = document.createElement("li");
-        text = text[0].toUpperCase() + text.slice(1).toLowerCase();
-        eachGroupedProduct.innerHTML = text;
-        this.groupedPreductList.append(eachGroupedProduct);
-      });
-    }
-    setSavingsText(text) {
-      this.savings.innerHTML = `SAVINGS: ${text}`;
-    }
-    getElementsReferences() {
-      this.groupedPreductList = this.shadowRoot.querySelector("ul");
-      this.savings = this.shadowRoot.querySelector(".savings");
-      this.productListSummaryHeader = this.shadowRoot.querySelector(".products-summary");
-    }
+      `,
+};
+
+export class ProductsAndSavingsListItem extends HTMLElement {
+  static TAG = 'products-and-savings-list-item';
+
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.innerHTML = template;
+    this.getElementsReferences();
   }
-  customElements.define(ProductsAndSavingsListItem.TAG, ProductsAndSavingsListItem);
+  setProductListSummaryHeader(numberOfProducts, discountRatio) {
+    this.productListSummaryHeader.innerHTML = `${numberOfProducts} Products, ${discountRatio}% Discount`;
+  }
+  createGroupedProductAndSetText(textArray) {
+    textArray.forEach((text) => {
+      const eachGroupedProduct = document.createElement('li');
+      text = text[0].toUpperCase() + text.slice(1).toLowerCase();
+      eachGroupedProduct.innerHTML = text;
+      this.groupedPreductList.append(eachGroupedProduct);
+    });
+  }
+  setSavingsText(text) {
+    this.savings.innerHTML = `SAVINGS: ${text}`;
+  }
+  getElementsReferences() {
+    this.groupedPreductList = this.shadowRoot.querySelector('ul');
+    this.savings = this.shadowRoot.querySelector('.savings');
+    this.productListSummaryHeader = this.shadowRoot.querySelector('.products-summary');
+  }
+}
+customElements.define(ProductsAndSavingsListItem.TAG, ProductsAndSavingsListItem);

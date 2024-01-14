@@ -1,5 +1,5 @@
 const { template } = {
-    template: `
+  template: `
       <style>  
       div{
         position: relative;
@@ -38,36 +38,35 @@ const { template } = {
         <input type="text">
         <p></p>
       </div>
-      `
-  };
-  
-  export class TextInput extends HTMLElement {
-    static TAG = "text-input";
-  
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.shadowRoot.innerHTML = template;
-      this.getElementsReferences();
-    }
-    get value() {
-      return this.input.value;
-    }
-    /*setValidationRule(validationRule) {
+      `,
+};
+
+export class TextInput extends HTMLElement {
+  static TAG = 'text-input';
+
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.innerHTML = template;
+    this.getElementsReferences();
+  }
+  get value() {
+    return this.input.value;
+  }
+  /*setValidationRule(validationRule) {
 
     }*/
-    setInput(name, id, text) {
-      this.div.className = name;
-      this.label.htmlFor = id; 
-      this.label.textContent = text;
-      this.input.id = id;
-      this.input.name = id;
-    }
-    getElementsReferences() {
-     this.div = this.shadowRoot.querySelector("div");
-     this.label = this.shadowRoot.querySelector("label");
-     this.input = this.shadowRoot.querySelector("input");
-    }
-    
+  setInput(name, id, text) {
+    this.div.className = name;
+    this.label.htmlFor = id;
+    this.label.textContent = text;
+    this.input.id = id;
+    this.input.name = id;
   }
-  customElements.define(TextInput.TAG, TextInput);
+  getElementsReferences() {
+    this.div = this.shadowRoot.querySelector('div');
+    this.label = this.shadowRoot.querySelector('label');
+    this.input = this.shadowRoot.querySelector('input');
+  }
+}
+customElements.define(TextInput.TAG, TextInput);

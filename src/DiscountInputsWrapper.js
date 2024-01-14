@@ -1,5 +1,5 @@
-import { NumberInput } from "./NumberInput.js";
-import { Button } from "./Button.js";
+import { NumberInput } from './NumberInput.js';
+import { Button } from './Button.js';
 
 const { template } = {
   template: `
@@ -16,22 +16,22 @@ const { template } = {
         <number-input class="first-input"></number-input>
         <number-input class="second-input"></number-input>
     </li>
-    `
+    `,
 };
 
 export class DiscountInputsWrapper extends HTMLElement {
-  static TAG = "discount-inputs-wrapper";
+  static TAG = 'discount-inputs-wrapper';
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
-    this.deleteButton.textContent = "-";
-    this.deleteButton.className = "delete-button";
+    this.deleteButton.textContent = '-';
+    this.deleteButton.className = 'delete-button';
   }
   addEventListenerToDeleteButton(callback) {
-    this.deleteButton.addEventListener("click", callback);
+    this.deleteButton.addEventListener('click', callback);
   }
   setInputs(name1, id1, text1, name2, id2, text2) {
     this.firstInput.setInput(name1, id1, text1);
@@ -41,11 +41,10 @@ export class DiscountInputsWrapper extends HTMLElement {
     return [this.firstInput.value, this.secondInput.value];
   }
   getElementsReferences() {
-    this.inputsWrapper = this.shadowRoot.querySelector(".discount-inputs-wrapper");
-    this.firstInput = this.shadowRoot.querySelector(".first-input");
-    this.deleteButton = this.shadowRoot.querySelector(".delete-button");
-    this.secondInput = this.shadowRoot.querySelector(".second-input");
+    this.inputsWrapper = this.shadowRoot.querySelector('.discount-inputs-wrapper');
+    this.firstInput = this.shadowRoot.querySelector('.first-input');
+    this.deleteButton = this.shadowRoot.querySelector('.delete-button');
+    this.secondInput = this.shadowRoot.querySelector('.second-input');
   }
-  
 }
 customElements.define(DiscountInputsWrapper.TAG, DiscountInputsWrapper);
