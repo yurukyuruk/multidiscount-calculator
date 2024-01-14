@@ -9,7 +9,7 @@ const { template } = {
         font-size: 20px;
         width: 90vw;
         padding-top: 20px;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
         cursor: pointer;
     }
     ul {
@@ -59,7 +59,7 @@ export class Products extends HTMLElement {
     this.setEventListenerToDeleteButtonOfFirstInput();
   }
   setEventListenerToDeleteButtonOfFirstInput() {
-    this.productInputsWrapper.addEventListenerToDeleteButton(() => {this.productInputsWrapper.remove().bind(this)});
+    this.productInputsWrapper.addEventListenerToDeleteButton(() => {this.productInputsWrapper.remove()});
   }
   addNewInputs() {
     const newInputsWrapper = new ProductInputsWrapper();

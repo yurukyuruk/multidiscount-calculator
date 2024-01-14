@@ -8,6 +8,7 @@ const { template } = {
         justify-content: center;
         width: 20px;
         height: 20px;
+        margin-top: 5px;
         border-radius: 5px;  
         cursor: pointer;
       }
@@ -18,7 +19,7 @@ const { template } = {
         border-radius: 15px;
         height: 30px;
         width: 80px;
-        margin-top: 20px;
+        margin-top: 10px;
         margin-bottom: 30px;
         cursor: pointer;
     }
@@ -29,7 +30,7 @@ const { template } = {
       border-radius: 15px;
       height: 30px;
       width: 80px;
-      margin-top: 20px;
+      margin-top: 10px;
       margin-bottom: 30px;
       cursor: pointer;
     }

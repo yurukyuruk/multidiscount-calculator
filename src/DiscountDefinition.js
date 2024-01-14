@@ -16,7 +16,7 @@ const { template } = {
         font-size: 20px;
         width: 90vw;
         padding-top: 20px;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
         cursor: pointer;
     }
     ul {

@@ -8,8 +8,8 @@ const { template } = {
     .inputs-wrapper {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        padding-top: 20px;
+        align-items: start;
+        padding-top: 10px;
     }
     </style>
     <li class="inputs-wrapper">

@@ -21,6 +21,12 @@ const { template } = {
         border-radius: 5px;
         border: 1px solid rgb(116, 116, 116);
       }
+      p {
+        visibility: hidden;
+        margin:0;
+        color: red;
+        font-size: 14px;
+      }
       @media (min-width: 992px) {
         input {
             width: 15vw;
@@ -30,6 +36,7 @@ const { template } = {
       <div>
         <label></label>
         <input type="text">
+        <p></p>
       </div>
       `
   };
