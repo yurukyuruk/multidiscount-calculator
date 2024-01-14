@@ -4,6 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint . --cache --ext .ts",
+    "lint:fix": "eslint . --cache --ext .ts --fix",
+    "lint:watch": "esw . --watch --cache --ext .ts",
+    "prettyprint": "prettier --check .",
+    "prettyprint:fix": "prettier --write .",
     "test": "jest --coverage"
   },
   "repository": {
@@ -19,7 +24,7 @@
   "homepage": "https://github.com/yurukyuruk/multidiscount-calculator#readme",
   "jest": {
     "transform": {
-      "^.+\\.jsx?$": "babel-jest"
+      "^.+\\.jsx?$": "@swc/jest"
     },
     "testEnvironment": "jest-environment-jsdom"
   },
@@ -27,8 +32,16 @@
     "jest": "^29.7.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.23.8",
-    "babel-jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0"
+    "@swc/jest": "^0.2.26",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-watch": "^8.0.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "prettier": "^2.8.8",
+    "typescript": "^5.0.4"
   }
 }
