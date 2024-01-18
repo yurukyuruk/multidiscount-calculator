@@ -50,7 +50,7 @@ const { template } = {
     }
     initializeListeners() {
       this.summary.addEventListener("generate-summary-if-inputs-are-filled", () => {
-        if(this.discountDefinition.checkIfAnyInputInDiscountDefinitionIsEmpty() === true) {
+        if(this.discountDefinition.checkIfAnyInputInDiscountDefinitionIsEmpty() === true || this.products.checkIfAnyInputInDiscountDefinitionIsEmpty() === true) {
           this.summary.clearProductsAndSavingListItems();
           this.discountDefinition.displayErrorMessagesIfAnyInputIsEmptyInDiscountDefinition();
           this.products.displayErrorMessagesIfAnyInputIsEmptyInDiscountDefinition();
@@ -59,13 +59,6 @@ const { template } = {
         }
       })
     }
-
-    /*generateSummaryDependingOnInputValues() {
-      if(this.discountDefinition.checkIfAnyInputInDiscountDefinitionIsEmpty() === true) {
-        this.summary.addEventListenerToGenerateButton(this.displayErrorMessageAndDisableGenerateButton.bind(this));
-      } else {
-        this.summary.addEventListenerToGenerateButton(this.generateSummaryListItems.bind(this));
-      }*/
     getElementsReferences() {
      this.discountDefinition = this.shadowRoot.querySelector("discount-definition");
      this.products = this.shadowRoot.querySelector("products-element");
