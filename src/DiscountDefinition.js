@@ -98,6 +98,18 @@ export class DiscountDefinition extends HTMLElement {
     })
     return discountInputValues;
   }
+  checkIfAnyInputInDiscountDefinitionIsEmpty() {
+    this.discountInputsWrappers = [...this.shadowRoot.querySelectorAll("discount-inputs-wrapper")];
+    return this.discountInputsWrappers.some((discountInputsWrapper) => {
+      return discountInputsWrapper.checkIfAnyInputIsEmpty() === true;
+    });
+  }
+  displayErrorMessagesIfAnyInputIsEmptyInDiscountDefinition() {
+    this.discountInputsWrappers = [...this.shadowRoot.querySelectorAll("discount-inputs-wrapper")];
+    this.discountInputsWrappers.forEach((discountInputsWrapper) => {
+      discountInputsWrapper.displayErrorMessagesIfAnyInputIsEmpty();
+    })
+  }
   getElementsReferences() {
     this.inputsWrapperList = this.shadowRoot.querySelector(".inputs-wrapper-list");
     this.discountInputsWrapper = this.shadowRoot.querySelector("discount-inputs-wrapper");

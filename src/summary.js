@@ -42,10 +42,21 @@ export class Summary extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
+    this.initializeListeners();
     this.setGenerateButton();
   }
+  /*
   addEventListenerToGenerateButton(callback) {
     this.generateButton.addEventListener("click", callback);
+  }*/
+  initializeListeners() {
+    this.generateButton.addEventListener("click", () => {
+      const generateSummaryIfInputsAreFilled = new CustomEvent("generate-summary-if-inputs-are-filled", {
+        bubbles: true,
+        composed: true
+      });
+      this.shadowRoot.dispatchEvent(generateSummaryIfInputsAreFilled);
+    });
   }
   setGenerateButton() {
     this.generateButton.className = "generate-button";

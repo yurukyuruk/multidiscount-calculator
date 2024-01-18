@@ -29,6 +29,7 @@ export class DiscountInputsWrapper extends HTMLElement {
     this.getElementsReferences();
     this.deleteButton.textContent = "-";
     this.deleteButton.className = "delete-button";
+    this.addErrorMessagesForEmptyInputs();
   }
   addEventListenerToDeleteButton(callback) {
     this.deleteButton.addEventListener("click", callback);
@@ -39,6 +40,19 @@ export class DiscountInputsWrapper extends HTMLElement {
   }
   getInputValues() {
     return [this.firstInput.value, this.secondInput.value];
+  }
+  addErrorMessagesForEmptyInputs() {
+    this.firstInput.createErrorMessageForEmptyInput("Item count");
+    this.secondInput.createErrorMessageForEmptyInput("Discount");
+  }
+  checkIfAnyInputIsEmpty() {
+    if(this.firstInput.checkIfInputIsEmpty() === true || this.secondInput.checkIfInputIsEmpty() === true) {
+      return true;
+    }
+  }
+  displayErrorMessagesIfAnyInputIsEmpty() {
+    this.firstInput.displayErrorMessageIfInputIsEmpty();
+    this.secondInput.displayErrorMessageIfInputIsEmpty();
   }
   getElementsReferences() {
     this.inputsWrapper = this.shadowRoot.querySelector(".discount-inputs-wrapper");

@@ -83,6 +83,18 @@ export class Products extends HTMLElement {
     })
     return productInputValues;
   }
+  checkIfAnyInputInDiscountDefinitionIsEmpty() {
+    this.productInputsWrappers = [...this.shadowRoot.querySelectorAll("product-inputs-wrapper")];
+    return this.productInputsWrappers.some((productInputsWrapper) => {
+      return productInputsWrapper.checkIfAnyInputIsEmpty() === true;
+    });
+  }
+  displayErrorMessagesIfAnyInputIsEmptyInDiscountDefinition() {
+    this.productInputsWrappers = [...this.shadowRoot.querySelectorAll("product-inputs-wrapper")];
+    this.productInputsWrappers.forEach((productInputsWrapper) => {
+      productInputsWrapper.displayErrorMessagesIfAnyInputIsEmpty();
+    })
+  }
   initializeListeners() {
     this.addButton.addEventListener("click", () => {
       this.addNewInputs(); 

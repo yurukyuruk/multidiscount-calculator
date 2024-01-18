@@ -49,13 +49,11 @@ const { template } = {
       this.attachShadow({ mode: "open" });
       this.shadowRoot.innerHTML = template;
       this.getElementsReferences();
+      this.initializeListeners();
     }
     get value() {
       return this.input.value;
     }
-    /*setValidationRule(validationRule) {
-
-    }*/
     setInput(name, id, text) {
       this.div.className = name;
       this.label.htmlFor = id; 
@@ -63,10 +61,39 @@ const { template } = {
       this.input.id = id;
       this.input.name = id;
     }
+    checkIfInputIsEmpty() {
+      if(this.input.value === "") {
+        return true;
+      }
+    }
+    displayErrorMessageIfInputIsEmpty() {
+      if(this.input.value === "") {
+        this.errorMesage.style.visibility = "visible";
+        this.input.style.outline = "1px solid red";
+      } else {
+        this.errorMesage.style.visibility = "hidden";
+        this.input.style.outline = "none";
+      }
+    }
+    initializeListeners() {
+      this.input.addEventListener("input", () => {
+        if(this.input.value === "") {
+          this.errorMesage.style.visibility = "visible";
+          this.input.style.outline = "1px solid red";
+        } else {
+          this.errorMesage.style.visibility = "hidden";
+          this.input.style.outline = "none";
+        }
+      })
+    }  
+    createErrorMessageForEmptyInput(field) {
+      this.errorMesage.innerHTML = `${field} can not be empty.`;
+    }
     getElementsReferences() {
      this.div = this.shadowRoot.querySelector("div");
      this.label = this.shadowRoot.querySelector("label");
      this.input = this.shadowRoot.querySelector("input");
+     this.errorMesage = this.shadowRoot.querySelector("p");
     }
     
   }

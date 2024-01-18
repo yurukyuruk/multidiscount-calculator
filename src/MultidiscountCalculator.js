@@ -39,7 +39,7 @@ const { template } = {
       this.attachShadow({ mode: "open" });
       this.shadowRoot.innerHTML = template;
       this.getElementsReferences();  
-      this.summary.addEventListenerToGenerateButton(this.generateSummaryListItems.bind(this));
+      this.initializeListeners();     
     }
     generateSummaryListItems() {
       this.summary.clearProductsAndSavingListItems();
@@ -48,6 +48,24 @@ const { template } = {
           this.summary.createProductsAndSavingsListItem(finalGroup.discountRatio, finalGroup.names, finalGroup.propotionalDiscount);
         })
     }
+    initializeListeners() {
+      this.summary.addEventListener("generate-summary-if-inputs-are-filled", () => {
+        if(this.discountDefinition.checkIfAnyInputInDiscountDefinitionIsEmpty() === true) {
+          this.summary.clearProductsAndSavingListItems();
+          this.discountDefinition.displayErrorMessagesIfAnyInputIsEmptyInDiscountDefinition();
+          this.products.displayErrorMessagesIfAnyInputIsEmptyInDiscountDefinition();
+        } else {
+          this.generateSummaryListItems();
+        }
+      })
+    }
+
+    /*generateSummaryDependingOnInputValues() {
+      if(this.discountDefinition.checkIfAnyInputInDiscountDefinitionIsEmpty() === true) {
+        this.summary.addEventListenerToGenerateButton(this.displayErrorMessageAndDisableGenerateButton.bind(this));
+      } else {
+        this.summary.addEventListenerToGenerateButton(this.generateSummaryListItems.bind(this));
+      }*/
     getElementsReferences() {
      this.discountDefinition = this.shadowRoot.querySelector("discount-definition");
      this.products = this.shadowRoot.querySelector("products-element");
