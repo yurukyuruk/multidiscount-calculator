@@ -39,7 +39,7 @@ export class DiscountInputsWrapper extends HTMLElement {
     this.secondInput.setInput(name2, id2, text2);
   }
   getInputValues() {
-    return [this.firstInput.value, this.secondInput.value];
+    return {itemCount: this.firstInput.value, discount: this.secondInput.value};
   }
   addErrorMessagesForEmptyInputs() {
     this.firstInput.createErrorMessageForEmptyInput("Item count");

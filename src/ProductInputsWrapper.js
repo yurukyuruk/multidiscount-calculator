@@ -40,7 +40,7 @@ export class ProductInputsWrapper extends HTMLElement {
     this.secondInput.setInput(name2, id2, text2);
   }
   getInputValues() {
-    return [this.firstInput.value, this.secondInput.value];
+    return {productName: this.firstInput.value, price: this.secondInput.value};
   }
   addErrorMessagesForEmptyInputs() {
     this.firstInput.createErrorMessageForEmptyInput("Product name");

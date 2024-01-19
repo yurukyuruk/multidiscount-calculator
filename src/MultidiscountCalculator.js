@@ -1,7 +1,7 @@
 import { DiscountDefinition } from "./DiscountDefinition.js";
 import { Products } from "./Products.js";
 import { Summary } from "./Summary.js";
-import { ProductGrouping } from "./ProductGrouping.js";
+import { ProductGroup } from "./ProductGroup.js";
 
 
 const { template } = {
@@ -33,7 +33,7 @@ const { template } = {
   
   export class MultidiscountCalculator extends HTMLElement {
     static TAG = "multidiscount-calculator";
-    static PRODUCT_GROUPING = new ProductGrouping();
+    static PRODUCT_GROUPING = new ProductGroup();
     constructor() {
       super();
       this.attachShadow({ mode: "open" });
@@ -44,9 +44,9 @@ const { template } = {
     generateSummaryListItems() {
       this.summary.clearProductsAndSavingListItems();
         const finalGroupsAndTheirDiscounts =  MultidiscountCalculator.PRODUCT_GROUPING.useInputData(this.discountDefinition.getDiscountInputValues(), this.products.getProductInputValues());  
-        finalGroupsAndTheirDiscounts.forEach((finalGroup) => {
+        /*finalGroupsAndTheirDiscounts.forEach((finalGroup) => {
           this.summary.createProductsAndSavingsListItem(finalGroup.discountRatio, finalGroup.names, finalGroup.propotionalDiscount);
-        })
+        })*/
     }
     initializeListeners() {
       this.summary.addEventListener("generate-summary-if-inputs-are-filled", () => {
