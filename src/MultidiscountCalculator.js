@@ -44,9 +44,9 @@ const { template } = {
     generateSummaryListItems() {
       this.summary.clearProductsAndSavingListItems();
         const finalGroupsAndTheirDiscounts =  MultidiscountCalculator.PRODUCT_GROUPING.useInputData(this.discountDefinition.getDiscountInputValues(), this.products.getProductInputValues());  
-        /*finalGroupsAndTheirDiscounts.forEach((finalGroup) => {
-          this.summary.createProductsAndSavingsListItem(finalGroup.discountRatio, finalGroup.names, finalGroup.propotionalDiscount);
-        })*/
+        finalGroupsAndTheirDiscounts.forEach((finalGroup) => {
+          this.summary.createProductsAndSavingsListItem(finalGroup.itemCount, finalGroup.discountRatio, finalGroup.productNames, finalGroup.discountAmount);
+        })
     }
     initializeListeners() {
       this.summary.addEventListener("generate-summary-if-inputs-are-filled", () => {

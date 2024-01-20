@@ -65,9 +65,9 @@ export class Summary extends HTMLElement {
   clearProductsAndSavingListItems() {
     this.productsAndSavingList.innerHTML = "";
   }
-  createProductsAndSavingsListItem(discountRatio, groupedProductText, savingsText) {
+  createProductsAndSavingsListItem(numberOfProducts, discountRatio, groupedProductText, savingsText) {
     const newProductsAndSavingsListItem = new ProductsAndSavingsListItem(); 
-    newProductsAndSavingsListItem.setProductListSummaryHeader(groupedProductText.length, discountRatio);
+    newProductsAndSavingsListItem.setProductListSummaryHeader(numberOfProducts, discountRatio);
     newProductsAndSavingsListItem.createGroupedProductAndSetText(groupedProductText);
     newProductsAndSavingsListItem.setSavingsText(savingsText);
     this.productsAndSavingList.append(newProductsAndSavingsListItem);
