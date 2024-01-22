@@ -1,7 +1,7 @@
 import { DiscountDefinition } from "./DiscountDefinition.js";
 import { Products } from "./Products.js";
 import { Summary } from "./Summary.js";
-import { ProductGroup } from "./ProductGroup.js";
+import {ProductGroup } from "./ProductGroup.js";
 
 
 const { template } = {
