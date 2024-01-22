@@ -9,7 +9,9 @@
     "lint:watch": "esw . --watch --cache --ext .ts",
     "prettyprint": "prettier --check .",
     "prettyprint:fix": "prettier --write .",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "start": "tsc --w",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",

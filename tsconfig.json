@@ -4,6 +4,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["ESNext", "DOM"],
+    "allowJs": true,
     "sourceMap": true,
     "outDir": "./dist",
     "tsBuildInfoFile": "./buildcache/multidiscount",
@@ -30,5 +31,7 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "esModuleInterop": true
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
