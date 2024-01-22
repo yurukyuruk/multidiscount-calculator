@@ -28,8 +28,9 @@ export class ProductInputsWrapper extends HTMLElement {
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
-    this.deleteButton.textContent = '-';
-    this.deleteButton.className = 'delete-button';
+    this.deleteButton.textContent = "-";
+    this.deleteButton.className = "delete-button";
+    this.addErrorMessagesForEmptyInputs();
   }
   addEventListenerToDeleteButton(callback) {
     this.deleteButton.addEventListener('click', callback);
@@ -39,7 +40,20 @@ export class ProductInputsWrapper extends HTMLElement {
     this.secondInput.setInput(name2, id2, text2);
   }
   getInputValues() {
-    return [this.firstInput.value, this.secondInput.value];
+    return {productName: this.firstInput.value, price: this.secondInput.value};
+  }
+  addErrorMessagesForEmptyInputs() {
+    this.firstInput.createErrorMessageForEmptyInput("Product name");
+    this.secondInput.createErrorMessageForEmptyInput("Price");
+  }
+  checkIfAnyInputIsEmpty() {
+    if(this.firstInput.checkIfInputIsEmpty() === true || this.secondInput.checkIfInputIsEmpty() === true) {
+      return true;
+    }
+  }
+  displayErrorMessagesIfAnyInputIsEmpty() {
+    this.firstInput.displayErrorMessageIfInputIsEmpty();
+    this.secondInput.displayErrorMessageIfInputIsEmpty();
   }
   getElementsReferences() {
     this.discountInputsWrapper = this.shadowRoot.querySelector('.discount-inputs-wrapper');

@@ -1,7 +1,8 @@
-import { DiscountDefinition } from './DiscountDefinition.js';
-import { Products } from './Products.js';
-import { Summary } from './Summary.js';
-import { ProductGrouping } from './ProductGrouping.js';
+import { DiscountDefinition } from "./DiscountDefinition.js";
+import { Products } from "./Products.js";
+import { Summary } from "./Summary.js";
+import {ProductGroup } from "./ProductGroup.js";
+
 
 const { template } = {
   template: `
@@ -27,37 +28,41 @@ const { template } = {
             <element-summary></element-summary>
         </section>
       </section>
-      `,
-};
-
-export class MultidiscountCalculator extends HTMLElement {
-  static TAG = 'multidiscount-calculator';
-  static PRODUCT_GROUPING = new ProductGrouping();
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-    this.shadowRoot.innerHTML = template;
-    this.getElementsReferences();
-    this.summary.addEventListenerToGenerateButton(this.generateSummaryListItems.bind(this));
+      `
+  };
+  
+  export class MultidiscountCalculator extends HTMLElement {
+    static TAG = "multidiscount-calculator";
+    static PRODUCT_GROUPING = new ProductGroup();
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+      this.shadowRoot.innerHTML = template;
+      this.getElementsReferences();  
+      this.initializeListeners();     
+    }
+    generateSummaryListItems() {
+      this.summary.clearProductsAndSavingListItems();
+        const finalGroupsAndTheirDiscounts =  MultidiscountCalculator.PRODUCT_GROUPING.useInputData(this.discountDefinition.getDiscountInputValues(), this.products.getProductInputValues());  
+        finalGroupsAndTheirDiscounts.forEach((finalGroup) => {
+          this.summary.createProductsAndSavingsListItem(finalGroup.itemCount, finalGroup.discountRatio, finalGroup.productNames, finalGroup.discountAmount);
+        })
+    }
+    initializeListeners() {
+      this.summary.addEventListener("generate-summary-if-inputs-are-filled", () => {
+        if(this.discountDefinition.checkIfAnyInputInDiscountDefinitionIsEmpty() === true || this.products.checkIfAnyInputInDiscountDefinitionIsEmpty() === true) {
+          this.summary.clearProductsAndSavingListItems();
+          this.discountDefinition.displayErrorMessagesIfAnyInputIsEmptyInDiscountDefinition();
+          this.products.displayErrorMessagesIfAnyInputIsEmptyInDiscountDefinition();
+        } else {
+          this.generateSummaryListItems();
+        }
+      })
+    }
+    getElementsReferences() {
+     this.discountDefinition = this.shadowRoot.querySelector("discount-definition");
+     this.products = this.shadowRoot.querySelector("products-element");
+     this.summary = this.shadowRoot.querySelector("element-summary");
+    }
   }
-  generateSummaryListItems() {
-    this.summary.clearProductsAndSavingListItems();
-    const finalGroupsAndTheirDiscounts = MultidiscountCalculator.PRODUCT_GROUPING.useInputData(
-      this.discountDefinition.getDiscountInputValues(),
-      this.products.getProductInputValues()
-    );
-    finalGroupsAndTheirDiscounts.forEach((finalGroup) => {
-      this.summary.createProductsAndSavingsListItem(
-        finalGroup.discountRatio,
-        finalGroup.names,
-        finalGroup.propotionalDiscount
-      );
-    });
-  }
-  getElementsReferences() {
-    this.discountDefinition = this.shadowRoot.querySelector('discount-definition');
-    this.products = this.shadowRoot.querySelector('products-element');
-    this.summary = this.shadowRoot.querySelector('element-summary');
-  }
-}
-customElements.define(MultidiscountCalculator.TAG, MultidiscountCalculator);
+  customElements.define(MultidiscountCalculator.TAG, MultidiscountCalculator);

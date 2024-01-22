@@ -36,35 +36,66 @@ const { template } = {
       <div>
         <label></label>
         <input type="number">
-        <p>ASDHJFG</p>
+        <p></p>
       </div>
-      `,
-};
-
-export class NumberInput extends HTMLElement {
-  static TAG = 'number-input';
-
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-    this.shadowRoot.innerHTML = template;
-    this.getElementsReferences();
+      `
+  };
+  
+  export class NumberInput extends HTMLElement {
+    static TAG = "number-input";
+  
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+      this.shadowRoot.innerHTML = template;
+      this.getElementsReferences();
+      this.initializeListeners();
+    }
+    get value() {
+      this.input.value = this.input.value.replace(/[^0-9.]/g, '')
+      return this.input.value;
+    }
+    setInput(name, id, text) {
+      this.div.className = name;
+      this.label.htmlFor = id; 
+      this.label.textContent = text;
+      this.input.id = id;
+      this.input.name = id;
+    }
+    checkIfInputIsEmpty() {
+      if(this.input.value === "") {
+        return true;
+      }
+    }
+    displayErrorMessageIfInputIsEmpty() {
+      if(this.input.value === "") {
+        this.errorMesage.style.visibility = "visible";
+        this.input.style.outline = "1px solid red";
+      } else {
+        this.errorMesage.style.visibility = "hidden";
+        this.input.style.outline = "none";
+      }
+    }
+    initializeListeners() {
+      this.input.addEventListener("input", () => {
+        if(this.input.value === "") {
+          this.errorMesage.style.visibility = "visible";
+          this.input.style.outline = "1px solid red";
+        } else {
+          this.errorMesage.style.visibility = "hidden";
+          this.input.style.outline = "none";
+        }
+      })
+    } 
+    createErrorMessageForEmptyInput(field) {
+      this.errorMesage.innerHTML = `${field} can not be empty.`;
+    }
+    getElementsReferences() {
+     this.div = this.shadowRoot.querySelector("div");
+     this.label = this.shadowRoot.querySelector("label");
+     this.input = this.shadowRoot.querySelector("input");
+     this.errorMesage = this.shadowRoot.querySelector("p");
+    }
+    
   }
-  get value() {
-    this.input.value = this.input.value.replace(/[^0-9.]/g, '');
-    return this.input.value;
-  }
-  setInput(name, id, text) {
-    this.div.className = name;
-    this.label.htmlFor = id;
-    this.label.textContent = text;
-    this.input.id = id;
-    this.input.name = id;
-  }
-  getElementsReferences() {
-    this.div = this.shadowRoot.querySelector('div');
-    this.label = this.shadowRoot.querySelector('label');
-    this.input = this.shadowRoot.querySelector('input');
-  }
-}
-customElements.define(NumberInput.TAG, NumberInput);
+  customElements.define(NumberInput.TAG, NumberInput);

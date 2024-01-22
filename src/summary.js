@@ -41,10 +41,21 @@ export class Summary extends HTMLElement {
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
+    this.initializeListeners();
     this.setGenerateButton();
   }
+  /*
   addEventListenerToGenerateButton(callback) {
-    this.generateButton.addEventListener('click', callback);
+    this.generateButton.addEventListener("click", callback);
+  }*/
+  initializeListeners() {
+    this.generateButton.addEventListener("click", () => {
+      const generateSummaryIfInputsAreFilled = new CustomEvent("generate-summary-if-inputs-are-filled", {
+        bubbles: true,
+        composed: true
+      });
+      this.shadowRoot.dispatchEvent(generateSummaryIfInputsAreFilled);
+    });
   }
   setGenerateButton() {
     this.generateButton.className = 'generate-button';
@@ -53,9 +64,9 @@ export class Summary extends HTMLElement {
   clearProductsAndSavingListItems() {
     this.productsAndSavingList.innerHTML = '';
   }
-  createProductsAndSavingsListItem(discountRatio, groupedProductText, savingsText) {
-    const newProductsAndSavingsListItem = new ProductsAndSavingsListItem();
-    newProductsAndSavingsListItem.setProductListSummaryHeader(groupedProductText.length, discountRatio);
+  createProductsAndSavingsListItem(numberOfProducts, discountRatio, groupedProductText, savingsText) {
+    const newProductsAndSavingsListItem = new ProductsAndSavingsListItem(); 
+    newProductsAndSavingsListItem.setProductListSummaryHeader(numberOfProducts, discountRatio);
     newProductsAndSavingsListItem.createGroupedProductAndSetText(groupedProductText);
     newProductsAndSavingsListItem.setSavingsText(savingsText);
     this.productsAndSavingList.append(newProductsAndSavingsListItem);
