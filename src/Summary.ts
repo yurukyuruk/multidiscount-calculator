@@ -1,9 +1,7 @@
-import { Button } from "./Button.js";
-import { ProductsAndSavingsListItem } from "./ProductsAndSavingsListItem.js";
+import { Button } from './Button';
+import { ProductsAndSavingsListItem } from './ProductsAndSavingsListItem';
 
-
-const { template } = {
-  template: `
+const template = /*html*/ `
     <style>  
     .summary-header-and-generate-button {
         display: flex;
@@ -27,55 +25,55 @@ const { template } = {
   </style>
     <div class="summary-header-and-generate-button">
         <h2>Summary</h2>
-        <element-button></element-button>
+        <${Button.TAG}></${Button.TAG}>
     </div>
     <ul class="products-and-savings-list">
     </ul>
-    `
-};
-
+    `;
 export class Summary extends HTMLElement {
-  static TAG = "element-summary";
-
+  static TAG = 'element-summary';
+  shadowRoot: ShadowRoot;
+  generateButton!: Button;
+  productsAndSavingList!: HTMLUListElement;
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.shadowRoot = this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
     this.initializeListeners();
     this.setGenerateButton();
   }
-  /*
-  addEventListenerToGenerateButton(callback) {
-    this.generateButton.addEventListener("click", callback);
-  }*/
   initializeListeners() {
-    this.generateButton.addEventListener("click", () => {
-      const generateSummaryIfInputsAreFilled = new CustomEvent("generate-summary-if-inputs-are-filled", {
+    this.generateButton.addEventListener('click', () => {
+      const generateSummaryIfInputsAreFilled = new CustomEvent('generate-summary-if-inputs-are-filled', {
         bubbles: true,
-        composed: true
+        composed: true,
       });
       this.shadowRoot.dispatchEvent(generateSummaryIfInputsAreFilled);
     });
   }
   setGenerateButton() {
-    this.generateButton.className = "generate-button";
-    this.generateButton.textContent = "Generate";
+    this.generateButton.className = 'generate-button';
+    this.generateButton.textContent = 'Generate';
   }
   clearProductsAndSavingListItems() {
-    this.productsAndSavingList.innerHTML = "";
+    this.productsAndSavingList.innerHTML = '';
   }
-  createProductsAndSavingsListItem(numberOfProducts, discountRatio, groupedProductText, savingsText) {
-    const newProductsAndSavingsListItem = new ProductsAndSavingsListItem(); 
+  createProductsAndSavingsListItem(
+    numberOfProducts: number,
+    discountRatio: number,
+    groupedProductText: string[],
+    savingsText: number
+  ) {
+    const newProductsAndSavingsListItem = new ProductsAndSavingsListItem();
     newProductsAndSavingsListItem.setProductListSummaryHeader(numberOfProducts, discountRatio);
     newProductsAndSavingsListItem.createGroupedProductAndSetText(groupedProductText);
     newProductsAndSavingsListItem.setSavingsText(savingsText);
     this.productsAndSavingList.append(newProductsAndSavingsListItem);
   }
   getElementsReferences() {
-    this.generateButton = this.shadowRoot.querySelector("element-button");
-    this.productsAndSavingList = this.shadowRoot.querySelector(".products-and-savings-list");
+    this.generateButton = this.shadowRoot.querySelector(Button.TAG) as Button;
+    this.productsAndSavingList = this.shadowRoot.querySelector('.products-and-savings-list') as HTMLUListElement;
   }
-  
 }
 customElements.define(Summary.TAG, Summary);
