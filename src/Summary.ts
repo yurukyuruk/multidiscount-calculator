@@ -1,8 +1,7 @@
 import { Button } from './Button';
 import { ProductsAndSavingsListItem } from './ProductsAndSavingsListItem';
 
-const { template } = {
-  template: `
+const template = /*html*/ `
     <style>  
     .summary-header-and-generate-button {
         display: flex;
@@ -26,21 +25,19 @@ const { template } = {
   </style>
     <div class="summary-header-and-generate-button">
         <h2>Summary</h2>
-        <element-button></element-button>
+        <${Button.TAG}></${Button.TAG}>
     </div>
     <ul class="products-and-savings-list">
     </ul>
-    `,
-};
-
+    `;
 export class Summary extends HTMLElement {
   static TAG = 'element-summary';
-  shadowRoot!: ShadowRoot;
+  shadowRoot: ShadowRoot;
   generateButton!: Button;
   productsAndSavingList!: HTMLUListElement;
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.shadowRoot = this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
     this.initializeListeners();
@@ -75,7 +72,7 @@ export class Summary extends HTMLElement {
     this.productsAndSavingList.append(newProductsAndSavingsListItem);
   }
   getElementsReferences() {
-    this.generateButton = this.shadowRoot.querySelector('element-button') as Button;
+    this.generateButton = this.shadowRoot.querySelector(Button.TAG) as Button;
     this.productsAndSavingList = this.shadowRoot.querySelector('.products-and-savings-list') as HTMLUListElement;
   }
 }

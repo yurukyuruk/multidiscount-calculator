@@ -1,5 +1,4 @@
-const { template } = {
-  template: `
+const template = /*html*/ `
       <style>  
       .delete-button {
         background-color: white;
@@ -45,16 +44,15 @@ const { template } = {
     }
       </style>
       <button type="button"></button>
-      `,
-};
+      `;
 
 export class Button extends HTMLElement {
   static TAG = 'element-button';
-  shadowRoot!: ShadowRoot;
+  shadowRoot: ShadowRoot;
   button!: HTMLButtonElement;
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.shadowRoot = this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
   }

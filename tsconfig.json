@@ -33,6 +33,6 @@
     "resolveJsonModule": true,
     "esModuleInterop": true
   },
-  "include": ["src"],
+  "include": ["src", "main.ts"],
   "exclude": ["node_modules", "dist"]
 }

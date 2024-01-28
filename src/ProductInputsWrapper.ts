@@ -3,34 +3,31 @@ import { TextInput } from './TextInput';
 import { Button } from './Button';
 import { deleteButtonCallbackFunction } from './types/typesAndInterfaces';
 
-const { template } = {
-  template: `
-    <style>  
+const template = /*html*/ ` 
+  <style>  
     .inputs-wrapper {
         display: flex;
         justify-content: space-between;
         align-items: start;
         padding-top: 10px;
     }
-    </style>
-    <li class="inputs-wrapper">
-        <element-button class="delete-button"></element-button>
-        <text-input class="first-input"></text-input>
-        <number-input class="second-input"></number-input>
-    </li>
-    `,
-};
+  </style>
+  <li class="inputs-wrapper">
+      <${Button.TAG} class="delete-button"></${Button.TAG}>
+      <${TextInput.TAG} class="first-input"></${TextInput.TAG}>
+      <${NumberInput.TAG} class="second-input"></${NumberInput.TAG}>
+  </li>
+    `;
 
 export class ProductInputsWrapper extends HTMLElement {
   static TAG = 'product-inputs-wrapper';
-  shadowRoot!: ShadowRoot;
-  discountInputsWrapper!: HTMLLIElement;
+  shadowRoot: ShadowRoot;
   deleteButton!: Button;
   firstInput!: TextInput;
   secondInput!: NumberInput;
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.shadowRoot = this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
     this.deleteButton.textContent = '-';
@@ -63,7 +60,6 @@ export class ProductInputsWrapper extends HTMLElement {
     this.secondInput.displayErrorMessageIfInputIsEmpty();
   }
   getElementsReferences() {
-    this.discountInputsWrapper = this.shadowRoot.querySelector('.discount-inputs-wrapper') as HTMLLIElement;
     this.deleteButton = this.shadowRoot.querySelector('.delete-button') as Button;
     this.firstInput = this.shadowRoot.querySelector('.first-input') as TextInput;
     this.secondInput = this.shadowRoot.querySelector('.second-input') as NumberInput;

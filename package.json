@@ -4,26 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "vite",
+    "build": "tsc && eslint . --cache --ext .ts && vite build",
     "lint": "eslint . --cache --ext .ts",
     "lint:fix": "eslint . --cache --ext .ts --fix",
     "lint:watch": "esw . --watch --cache --ext .ts",
     "prettyprint": "prettier --check .",
     "prettyprint:fix": "prettier --write .",
-    "test": "jest --coverage",
-    "start": "tsc --w",
-    "build": "tsc"
+    "typecheck": "tsc",
+    "typecheck:watch": "tsc --w",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yurukyuruk/multidiscount-calculator.git"
+    "url": "git+https://github.com/kanow-blog/kanow-school-javascript-basics.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/yurukyuruk/multidiscount-calculator/issues"
-  },
-  "homepage": "https://github.com/yurukyuruk/multidiscount-calculator#readme",
+  "license": "MIT",
+  "homepage": "https://github.com/kanow-blog/kanow-school-javascript-basics/blob/master/projects/project-3/multidiscount-calculator-part-1.md",
   "jest": {
     "transform": {
       "^.+\\.jsx?$": "@swc/jest"
@@ -42,6 +41,7 @@
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "prettier": "^3.2.4",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
   }
 }

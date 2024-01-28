@@ -1,5 +1,4 @@
-const { template } = {
-  template: `
+const template = /*html*/ `
       <style>  
       div{
         position: relative;
@@ -38,19 +37,18 @@ const { template } = {
         <input type="text">
         <p></p>
       </div>
-      `,
-};
+      `;
 
 export class TextInput extends HTMLElement {
   static TAG = 'text-input';
-  shadowRoot!: ShadowRoot;
+  shadowRoot: ShadowRoot;
   div!: HTMLDivElement;
   label!: HTMLLabelElement;
   input!: HTMLInputElement;
   errorMesage!: HTMLParagraphElement;
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.shadowRoot = this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
     this.initializeListeners();

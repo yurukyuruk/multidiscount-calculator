@@ -3,8 +3,8 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "paths": ["src"],
-        "extensions": [".js", ".mjs", ".jsx", ".ts", ".mts", ".tsx"]
+        "paths": ["src", "main.ts"],
+        "extensions": [".js",".ts"]
       }
     }
   },

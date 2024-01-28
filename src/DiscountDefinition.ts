@@ -1,9 +1,9 @@
 import { DiscountInputsWrapper } from './DiscountInputsWrapper';
 import { Button } from './Button';
 
-const { template } = {
-  template: `
-    <style>  
+const template =
+  /*html*/
+  ` <style>  
     section {
         border-bottom: 1px solid  rgb(116, 116, 116);
     }
@@ -38,17 +38,16 @@ const { template } = {
             <details>
                 <summary>Discount Definition</summary>
                 <ul class = "inputs-wrapper-list">
-                  <discount-inputs-wrapper></discount-inputs-wrapper>
+                  <${DiscountInputsWrapper.TAG}></${DiscountInputsWrapper.TAG}>
                 </ul>
                 <div class="buttons-wrapper">
-                  <element-button class="add-button"></element-button>
-                  <element-button class="clear-button"></element-button>
+                  <${Button.TAG} class="add-button"></${Button.TAG}>
+                  <${Button.TAG} class="clear-button"></${Button.TAG}>
                 </div>
             </details>
         </form>
     </section>
-    `,
-};
+    `;
 
 export class DiscountDefinition extends HTMLElement {
   static TAG = 'discount-definition';
@@ -60,7 +59,7 @@ export class DiscountDefinition extends HTMLElement {
     'discount',
     'Discount',
   ];
-  shadowRoot!: ShadowRoot;
+  shadowRoot: ShadowRoot;
   inputsWrapperList!: HTMLUListElement;
   discountInputsWrapper!: DiscountInputsWrapper;
   discountInputsWrappers!: DiscountInputsWrapper[];
@@ -69,7 +68,7 @@ export class DiscountDefinition extends HTMLElement {
   clearButton!: Button;
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.shadowRoot = this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
     this.initializeListeners();
@@ -134,7 +133,7 @@ export class DiscountDefinition extends HTMLElement {
   }
   getElementsReferences() {
     this.inputsWrapperList = this.shadowRoot.querySelector('.inputs-wrapper-list') as HTMLUListElement;
-    this.discountInputsWrapper = this.shadowRoot.querySelector('discount-inputs-wrapper') as DiscountInputsWrapper;
+    this.discountInputsWrapper = this.shadowRoot.querySelector(DiscountInputsWrapper.TAG) as DiscountInputsWrapper;
     this.buttonsWrapper = this.shadowRoot.querySelector('.buttons-wrapper') as HTMLDivElement;
     this.addButton = this.shadowRoot.querySelector('.add-button') as Button;
     this.clearButton = this.shadowRoot.querySelector('.clear-button') as Button;

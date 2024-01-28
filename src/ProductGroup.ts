@@ -87,11 +87,9 @@ export class ProductGroup extends HTMLElement {
 
     function filterObjectsByCondition(
       objArray: ProductGroupWithItsDiscountRatioAndDiscount[],
-      conditionArray: string[],
+      conditionArray: string[]
     ) {
-      return objArray.filter(
-        (obj) => !obj.productNames.some((item: string) => conditionArray.includes(item))
-      );
+      return objArray.filter((obj) => !obj.productNames.some((item: string) => conditionArray.includes(item)));
     }
 
     if (quantityOfProductTypes - quantityOfProductTypesAlreadyGrouped >= minimumGroupNumber) {

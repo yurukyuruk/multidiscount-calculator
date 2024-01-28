@@ -2,9 +2,9 @@ import { NumberInput } from './NumberInput';
 import { Button } from './Button';
 import { deleteButtonCallbackFunction } from './types/typesAndInterfaces';
 
-const { template } = {
-  template: `
-    <style>  
+const template =
+  /*html*/
+  ` <style>  
     .inputs-wrapper {
         display: flex;
         justify-content: space-between;
@@ -13,23 +13,21 @@ const { template } = {
     }
     </style>
     <li class="inputs-wrapper">
-        <element-button class="delete-button"></element-button>
-        <number-input class="first-input"></number-input>
-        <number-input class="second-input"></number-input>
+        <${Button.TAG} class="delete-button"></${Button.TAG}>
+        <${NumberInput.TAG} class="first-input"></${NumberInput.TAG}>
+        <${NumberInput.TAG} class="second-input"></${NumberInput.TAG}>
     </li>
-    `,
-};
+    `;
 
 export class DiscountInputsWrapper extends HTMLElement {
   static TAG = 'discount-inputs-wrapper';
-  shadowRoot!: ShadowRoot;
-  inputsWrapper!: HTMLLIElement;
+  shadowRoot: ShadowRoot;
   deleteButton!: Button;
   firstInput!: NumberInput;
   secondInput!: NumberInput;
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.shadowRoot = this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
     this.deleteButton.textContent = '-';
@@ -62,7 +60,6 @@ export class DiscountInputsWrapper extends HTMLElement {
     this.secondInput.displayErrorMessageIfInputIsEmpty();
   }
   getElementsReferences() {
-    this.inputsWrapper = this.shadowRoot.querySelector('.discount-inputs-wrapper') as HTMLLIElement;
     this.deleteButton = this.shadowRoot.querySelector('.delete-button') as Button;
     this.firstInput = this.shadowRoot.querySelector('.first-input') as NumberInput;
     this.secondInput = this.shadowRoot.querySelector('.second-input') as NumberInput;

@@ -1,8 +1,7 @@
 import { ProductInputsWrapper } from './ProductInputsWrapper';
 import { Button } from './Button';
 
-const { template } = {
-  template: `
+const template = /*html*/ `
     <style>  
     summary {
         color:rgb(28, 28, 28);
@@ -31,17 +30,16 @@ const { template } = {
             <details>
                 <summary>Products</summary>
                 <ul class = "inputs-wrapper-list">
-                  <product-inputs-wrapper></product-inputs-wrapper>
+                  <${ProductInputsWrapper.TAG}></${ProductInputsWrapper.TAG}>
                 </ul>
                 <div class="buttons-wrapper">
-                  <element-button class="add-button"></element-button>
-                  <element-button class="clear-button"></element-button>
+                  <${Button.TAG} class="add-button"></${Button.TAG}>
+                  <${Button.TAG} class="clear-button"></${Button.TAG}>
                 </div>
             </details>
         </form>
     </section>
-    `,
-};
+    `;
 
 export class Products extends HTMLElement {
   static TAG = 'products-element';
@@ -53,7 +51,7 @@ export class Products extends HTMLElement {
     'price',
     'Price',
   ];
-  shadowRoot!: ShadowRoot;
+  shadowRoot: ShadowRoot;
   inputsWrapperList!: HTMLUListElement;
   productInputsWrapper!: ProductInputsWrapper;
   productInputsWrappers!: ProductInputsWrapper[];
@@ -62,7 +60,7 @@ export class Products extends HTMLElement {
   clearButton!: Button;
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.shadowRoot = this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
     this.initializeListeners();
@@ -123,7 +121,7 @@ export class Products extends HTMLElement {
   }
   getElementsReferences() {
     this.inputsWrapperList = this.shadowRoot.querySelector('.inputs-wrapper-list') as HTMLUListElement;
-    this.productInputsWrapper = this.shadowRoot.querySelector('product-inputs-wrapper') as ProductInputsWrapper;
+    this.productInputsWrapper = this.shadowRoot.querySelector(ProductInputsWrapper.TAG) as ProductInputsWrapper;
     this.buttonsWrapper = this.shadowRoot.querySelector('.buttons-wrapper') as HTMLDivElement;
     this.addButton = this.shadowRoot.querySelector('.add-button') as Button;
     this.clearButton = this.shadowRoot.querySelector('.clear-button') as Button;

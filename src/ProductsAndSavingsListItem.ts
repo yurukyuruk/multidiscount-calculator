@@ -1,5 +1,4 @@
-const { template } = {
-  template: `
+const template = /*html*/ `
       <style>  
       .grouped-product {
         display: flex;
@@ -57,18 +56,17 @@ const { template } = {
                 <h2 class="savings"></h2>
             </div>
       </li>
-      `,
-};
+      `;
 
 export class ProductsAndSavingsListItem extends HTMLElement {
   static TAG = 'products-and-savings-list-item';
-  shadowRoot!: ShadowRoot;
+  shadowRoot: ShadowRoot;
   groupedPreductList!: HTMLUListElement;
   savings!: HTMLHeadingElement;
   productListSummaryHeader!: HTMLHeadingElement;
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.shadowRoot = this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
   }
