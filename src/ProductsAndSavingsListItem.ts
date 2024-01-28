@@ -62,31 +62,34 @@ const { template } = {
 
 export class ProductsAndSavingsListItem extends HTMLElement {
   static TAG = 'products-and-savings-list-item';
-
+  shadowRoot!: ShadowRoot;
+  groupedPreductList!: HTMLUListElement;
+  savings!: HTMLHeadingElement;
+  productListSummaryHeader!: HTMLHeadingElement;
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
   }
-  setProductListSummaryHeader(numberOfProducts, discountRatio) {
+  setProductListSummaryHeader(numberOfProducts: number, discountRatio: number) {
     this.productListSummaryHeader.innerHTML = `${numberOfProducts} Products, ${discountRatio}% Discount`;
   }
-  createGroupedProductAndSetText(textArray) {
+  createGroupedProductAndSetText(textArray: string[]) {
     textArray.forEach((text) => {
       const eachGroupedProduct = document.createElement('li');
-      text = text[0].toUpperCase() + text.slice(1).toLowerCase();
-      eachGroupedProduct.innerHTML = text;
+      const uppercaseText = text[0].toUpperCase() + text.slice(1).toLowerCase();
+      eachGroupedProduct.innerHTML = uppercaseText;
       this.groupedPreductList.append(eachGroupedProduct);
     });
   }
-  setSavingsText(text) {
+  setSavingsText(text: number) {
     this.savings.innerHTML = `SAVINGS: ${text}`;
   }
   getElementsReferences() {
-    this.groupedPreductList = this.shadowRoot.querySelector('ul');
-    this.savings = this.shadowRoot.querySelector('.savings');
-    this.productListSummaryHeader = this.shadowRoot.querySelector('.products-summary');
+    this.groupedPreductList = this.shadowRoot.querySelector('ul') as HTMLUListElement;
+    this.savings = this.shadowRoot.querySelector('.savings') as HTMLHeadingElement;
+    this.productListSummaryHeader = this.shadowRoot.querySelector('.products-summary') as HTMLHeadingElement;
   }
 }
 customElements.define(ProductsAndSavingsListItem.TAG, ProductsAndSavingsListItem);

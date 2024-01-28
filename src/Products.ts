@@ -1,5 +1,5 @@
-import { ProductInputsWrapper } from './ProductInputsWrapper.js';
-import { Button } from './Button.js';
+import { ProductInputsWrapper } from './ProductInputsWrapper';
+import { Button } from './Button';
 
 const { template } = {
   template: `
@@ -45,22 +45,28 @@ const { template } = {
 
 export class Products extends HTMLElement {
   static TAG = 'products-element';
-
+  static PRODUCTS_INPUT_INFORMATION: [string, string, string, string, string, string] = [
+    'product-name-input-area',
+    'product-name',
+    'Product name',
+    'price-input-area',
+    'price',
+    'Price',
+  ];
+  shadowRoot!: ShadowRoot;
+  inputsWrapperList!: HTMLUListElement;
+  productInputsWrapper!: ProductInputsWrapper;
+  productInputsWrappers!: ProductInputsWrapper[];
+  buttonsWrapper!: HTMLDivElement;
+  addButton!: Button;
+  clearButton!: Button;
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
     this.initializeListeners();
-    this.productsInputInformation = [
-      'product-name-input-area',
-      'product-name',
-      'Product name',
-      'price-input-area',
-      'price',
-      'Price',
-    ];
-    this.productInputsWrapper.setInputs(...this.productsInputInformation);
+    this.productInputsWrapper.setInputs(...Products.PRODUCTS_INPUT_INFORMATION);
     this.setAddButton();
     this.setClearButton();
     this.setEventListenerToDeleteButtonOfFirstInput();
@@ -72,7 +78,7 @@ export class Products extends HTMLElement {
   }
   addNewInputs() {
     const newInputsWrapper = new ProductInputsWrapper();
-    newInputsWrapper.setInputs(...this.productsInputInformation);
+    newInputsWrapper.setInputs(...Products.PRODUCTS_INPUT_INFORMATION);
     newInputsWrapper.addEventListenerToDeleteButton(() => {
       newInputsWrapper.remove();
     });
@@ -87,24 +93,24 @@ export class Products extends HTMLElement {
     this.clearButton.textContent = 'Clear';
   }
   getProductInputValues() {
-    const productInputValues = [];
-    const inputsWrappers = this.shadowRoot.querySelectorAll('product-inputs-wrapper');
+    const productInputValues: { productName: string; price: string }[] = [];
+    const inputsWrappers = this.shadowRoot.querySelectorAll<ProductInputsWrapper>('product-inputs-wrapper');
     inputsWrappers.forEach((wrapper) => {
       productInputValues.push(wrapper.getInputValues());
     });
     return productInputValues;
   }
   checkIfAnyInputInDiscountDefinitionIsEmpty() {
-    this.productInputsWrappers = [...this.shadowRoot.querySelectorAll("product-inputs-wrapper")];
-    return this.productInputsWrappers.some((productInputsWrapper) => {
-      return productInputsWrapper.checkIfAnyInputIsEmpty() === true;
-    });
+    this.productInputsWrappers = [...this.shadowRoot.querySelectorAll<ProductInputsWrapper>('product-inputs-wrapper')];
+    return this.productInputsWrappers.some(
+      (productInputsWrapper) => productInputsWrapper.checkIfAnyInputIsEmpty() === true
+    );
   }
   displayErrorMessagesIfAnyInputIsEmptyInDiscountDefinition() {
-    this.productInputsWrappers = [...this.shadowRoot.querySelectorAll("product-inputs-wrapper")];
+    this.productInputsWrappers = [...this.shadowRoot.querySelectorAll<ProductInputsWrapper>('product-inputs-wrapper')];
     this.productInputsWrappers.forEach((productInputsWrapper) => {
       productInputsWrapper.displayErrorMessagesIfAnyInputIsEmpty();
-    })
+    });
   }
   initializeListeners() {
     this.addButton.addEventListener('click', () => {
@@ -116,11 +122,11 @@ export class Products extends HTMLElement {
     });
   }
   getElementsReferences() {
-    this.inputsWrapperList = this.shadowRoot.querySelector('.inputs-wrapper-list');
-    this.productInputsWrapper = this.shadowRoot.querySelector('product-inputs-wrapper');
-    this.buttonsWrapper = this.shadowRoot.querySelector('.buttons-wrapper');
-    this.addButton = this.shadowRoot.querySelector('.add-button');
-    this.clearButton = this.shadowRoot.querySelector('.clear-button');
+    this.inputsWrapperList = this.shadowRoot.querySelector('.inputs-wrapper-list') as HTMLUListElement;
+    this.productInputsWrapper = this.shadowRoot.querySelector('product-inputs-wrapper') as ProductInputsWrapper;
+    this.buttonsWrapper = this.shadowRoot.querySelector('.buttons-wrapper') as HTMLDivElement;
+    this.addButton = this.shadowRoot.querySelector('.add-button') as Button;
+    this.clearButton = this.shadowRoot.querySelector('.clear-button') as Button;
   }
 }
 customElements.define(Products.TAG, Products);

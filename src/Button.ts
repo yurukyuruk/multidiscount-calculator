@@ -50,21 +50,22 @@ const { template } = {
 
 export class Button extends HTMLElement {
   static TAG = 'element-button';
-
+  shadowRoot!: ShadowRoot;
+  button!: HTMLButtonElement;
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
   }
-  set className(name) {
+  set className(name: string) {
     this.button.className = name;
   }
-  set textContent(text) {
+  set textContent(text: string) {
     this.button.textContent = text;
   }
   getElementsReferences() {
-    this.button = this.shadowRoot.querySelector('button');
+    this.button = this.shadowRoot.querySelector('button') as HTMLButtonElement;
   }
 }
 customElements.define(Button.TAG, Button);

@@ -1,5 +1,5 @@
-import { DiscountInputsWrapper } from './DiscountInputsWrapper.js';
-import { Button } from './Button.js';
+import { DiscountInputsWrapper } from './DiscountInputsWrapper';
+import { Button } from './Button';
 
 const { template } = {
   template: `
@@ -52,7 +52,7 @@ const { template } = {
 
 export class DiscountDefinition extends HTMLElement {
   static TAG = 'discount-definition';
-  static DISCOUNT_INPUT_INFORMATION = [
+  static DISCOUNT_INPUT_INFORMATION: [string, string, string, string, string, string] = [
     'item-count-input-area',
     'item-count',
     'Item count',
@@ -60,6 +60,13 @@ export class DiscountDefinition extends HTMLElement {
     'discount',
     'Discount',
   ];
+  shadowRoot!: ShadowRoot;
+  inputsWrapperList!: HTMLUListElement;
+  discountInputsWrapper!: DiscountInputsWrapper;
+  discountInputsWrappers!: DiscountInputsWrapper[];
+  buttonsWrapper!: HTMLDivElement;
+  addButton!: Button;
+  clearButton!: Button;
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -73,7 +80,7 @@ export class DiscountDefinition extends HTMLElement {
   }
   setEventListenerToDeleteButtonOfFirstInput() {
     this.discountInputsWrapper.addEventListenerToDeleteButton(() => {
-      this.discountInputsWrapper.remove().bind(this);
+      this.discountInputsWrapper.remove();
     });
   }
   addNewInputs() {
@@ -102,31 +109,35 @@ export class DiscountDefinition extends HTMLElement {
     });
   }
   getDiscountInputValues() {
-    const discountInputValues = [];
-    const inputsWrappers = this.shadowRoot.querySelectorAll('discount-inputs-wrapper');
+    const discountInputValues: { itemCount: string; discount: string }[] = [];
+    const inputsWrappers = this.shadowRoot.querySelectorAll<DiscountInputsWrapper>('discount-inputs-wrapper');
     inputsWrappers.forEach((wrapper) => {
       discountInputValues.push(wrapper.getInputValues());
     });
     return discountInputValues;
   }
   checkIfAnyInputInDiscountDefinitionIsEmpty() {
-    this.discountInputsWrappers = [...this.shadowRoot.querySelectorAll("discount-inputs-wrapper")];
-    return this.discountInputsWrappers.some((discountInputsWrapper) => {
-      return discountInputsWrapper.checkIfAnyInputIsEmpty() === true;
-    });
+    this.discountInputsWrappers = [
+      ...this.shadowRoot.querySelectorAll<DiscountInputsWrapper>('discount-inputs-wrapper'),
+    ];
+    return this.discountInputsWrappers.some(
+      (discountInputsWrapper) => discountInputsWrapper.checkIfAnyInputIsEmpty() === true
+    );
   }
   displayErrorMessagesIfAnyInputIsEmptyInDiscountDefinition() {
-    this.discountInputsWrappers = [...this.shadowRoot.querySelectorAll("discount-inputs-wrapper")];
+    this.discountInputsWrappers = [
+      ...this.shadowRoot.querySelectorAll<DiscountInputsWrapper>('discount-inputs-wrapper'),
+    ];
     this.discountInputsWrappers.forEach((discountInputsWrapper) => {
       discountInputsWrapper.displayErrorMessagesIfAnyInputIsEmpty();
-    })
+    });
   }
   getElementsReferences() {
-    this.inputsWrapperList = this.shadowRoot.querySelector('.inputs-wrapper-list');
-    this.discountInputsWrapper = this.shadowRoot.querySelector('discount-inputs-wrapper');
-    this.buttonsWrapper = this.shadowRoot.querySelector('.buttons-wrapper');
-    this.addButton = this.shadowRoot.querySelector('.add-button');
-    this.clearButton = this.shadowRoot.querySelector('.clear-button');
+    this.inputsWrapperList = this.shadowRoot.querySelector('.inputs-wrapper-list') as HTMLUListElement;
+    this.discountInputsWrapper = this.shadowRoot.querySelector('discount-inputs-wrapper') as DiscountInputsWrapper;
+    this.buttonsWrapper = this.shadowRoot.querySelector('.buttons-wrapper') as HTMLDivElement;
+    this.addButton = this.shadowRoot.querySelector('.add-button') as Button;
+    this.clearButton = this.shadowRoot.querySelector('.clear-button') as Button;
   }
 }
 customElements.define(DiscountDefinition.TAG, DiscountDefinition);
