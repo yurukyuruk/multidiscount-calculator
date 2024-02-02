@@ -7,8 +7,8 @@ const template = /*html*/ `
 <style> 
 .multidiscount-calculator-section {
   font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  width: 90vw;
+  margin: auto;
+  width: 90%;
 } 
 @media (min-width: 992px) {
   .multidiscount-calculator-section {
