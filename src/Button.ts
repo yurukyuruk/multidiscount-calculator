@@ -1,5 +1,34 @@
 const template = /*html*/ `
       <style>  
+      .copy-button {
+        background-color: white;
+        color: rgb(104,81,166);
+        border: 2px solid rgb(104,81,166);
+        border-radius: 15px;
+        margin-right: 5px;
+        height: 30px;
+        width: 120px;
+        cursor: pointer;
+      }
+      .whatsapp-button {
+        background-color: white;
+        color: rgb(104,81,166);
+        border: 2px solid rgb(104,81,166);
+        border-radius: 15px;
+        margin-right: 5px;
+        height: 30px;
+        width: 120px;
+        cursor: pointer;
+      }
+      .email-button {
+        background-color: white;
+        color: rgb(104,81,166);
+        border: 2px solid rgb(104,81,166);
+        border-radius: 15px;
+        height: 30px;
+        width: 120px;
+        cursor: pointer;
+      }
       .delete-button {
         background-color: white;
         color: rgb(104,81,166);
@@ -40,6 +69,18 @@ const template = /*html*/ `
       border-radius: 20px;
       height: 35px;
       width: 120px;
+      cursor: pointer;
+    }
+    .fab-button {
+      background: rgb(248, 242, 251) url("../images/whatsapp.png") center center / 30px 30px no-repeat;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+      border: 2px solid rgb(104,81,166);
+      width: 60px;
+      height: 60px;
+      border-radius: 15px;
+      position: fixed;
+      right: 10px;
+      bottom: 40px;
       cursor: pointer;
     }
       </style>
