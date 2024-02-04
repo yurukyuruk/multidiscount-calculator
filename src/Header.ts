@@ -21,6 +21,40 @@ const template = /*html*/ `
         .copy-button-wrapper, .whatsapp-button-wrapper, .email-button-wrapper {
             position: relative;
         }
+        .copy-button-wrapper {
+            display: block;
+        }
+        .tooltip {
+            position: relative;
+            visibility: hidden;
+        }
+        .tooltip-text::before {
+            content: "Copied!";
+            position: absolute;
+            left: 38px;
+            top: 6px;
+        }
+        .tooltip-text {
+            position: absolute;
+            top: -4px;
+            background-color: rgb(104,81,166);
+            color: white;
+            font-size: 13.3px;
+            width: 120px;
+            height: 30px;
+            border-radius: 15px;
+        }
+        .tooltip-arrow {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid rgb(104,81,166); 
+            top: 4px; 
+            left: 57px;
+        }
+
         .copy-image{
             width: 15px;
             position: absolute;
@@ -51,8 +85,14 @@ const template = /*html*/ `
         </div>
         <div class"buttons">
             <div class="copy-button-wrapper">
-                <img src="../images/copy.png" class="copy-image">
-                <${Button.TAG} class="copy-button"></${Button.TAG}>
+                <div>
+                    <img src="../images/copy.png" class="copy-image">
+                    <${Button.TAG} class="copy-button"></${Button.TAG}>
+                </div>
+                <div class="tooltip">
+                    <p class="tooltip-text"></p>
+                    <span class="tooltip-arrow"></span>
+                </div>
             </div>
             <div class="whatsapp-button-wrapper">
                 <img src="../images/whatsapp.png" class="whatsapp-image">
@@ -72,11 +112,14 @@ export class Header extends HTMLElement {
   copyButton!: Button;
   whatsappButton!: Button;
   emailButton!: Button;
+  tooltip!: HTMLDivElement;
+
   constructor() {
     super();
     this.shadowRoot = this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
+    this.initializeListeners();
     this.setClassNamesAndTextContentToButtons();
   }
   setClassNamesAndTextContentToButtons() {
@@ -87,10 +130,26 @@ export class Header extends HTMLElement {
     this.emailButton.className = "email-button";
     this.emailButton.textContent = "E-mail";
   }
+  initializeListeners() {
+    this.copyButton.addEventListener('click', () => {
+        const copySummaryListItems = new CustomEvent('copy-summary-list-items', {
+          bubbles: true,
+          composed: true,
+        });
+        this.shadowRoot.dispatchEvent(copySummaryListItems);
+      });
+  }
+  showTooltip() {
+    this.tooltip.style.visibility= "visible";
+  }
+  hideTooltip() {
+    this.tooltip.style.visibility= "hidden";
+  }
   getElementsReferences() {
     this.copyButton = this.shadowRoot.querySelector(".copy-button") as Button;
     this.whatsappButton = this.shadowRoot.querySelector(".whatsapp-button") as Button;
     this.emailButton = this.shadowRoot.querySelector(".email-button") as Button;
+    this.tooltip = this.shadowRoot.querySelector(".tooltip") as HTMLDivElement;
   }
 }
 customElements.define(Header.TAG, Header);

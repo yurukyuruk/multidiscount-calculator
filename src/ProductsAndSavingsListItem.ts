@@ -70,6 +70,19 @@ export class ProductsAndSavingsListItem extends HTMLElement {
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
   }
+  getTextContentOfListItem() {
+    let uLItems = ``;
+    let groupedProductListItems = [...this.groupedPreductList.children];
+    groupedProductListItems.forEach((groupedProduct) => {
+      uLItems += `
+      ∙${groupedProduct.textContent}`;
+    })
+    
+    return `
+    ${this.productListSummaryHeader.textContent} (${this.savings.textContent})
+    ${uLItems}
+    `;
+  }
   setProductListSummaryHeader(numberOfProducts: number, discountRatio: number) {
     this.productListSummaryHeader.innerHTML = `${numberOfProducts} Products, ${discountRatio}% Discount`;
   }
@@ -83,6 +96,9 @@ export class ProductsAndSavingsListItem extends HTMLElement {
   }
   setSavingsText(text: number) {
     this.savings.innerHTML = `SAVINGS: ${text}`;
+  }
+  createClipboardText() {
+
   }
   getElementsReferences() {
     this.groupedPreductList = this.shadowRoot.querySelector('ul') as HTMLUListElement;

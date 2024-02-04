@@ -1,3 +1,4 @@
+import { Header } from './Header';
 import { DiscountDefinition } from './DiscountDefinition';
 import { Products } from './Products';
 import { Summary } from './Summary';
@@ -17,6 +18,7 @@ const template = /*html*/ `
   }
 }
 </style>
+<${Header.TAG}></${Header.TAG}>
 <main class="multidiscount-calculator-section">
   <section>
       <${DiscountDefinition.TAG}></${DiscountDefinition.TAG}>
@@ -31,6 +33,7 @@ export class MultidiscountCalculator extends HTMLElement {
   static TAG = 'multidiscount-calculator';
   static PRODUCT_GROUPING = new ProductGroup();
   shadowRoot: ShadowRoot;
+  header!: Header;
   discountDefinition!: DiscountDefinition;
   products!: Products;
   summary!: Summary;
@@ -70,8 +73,16 @@ export class MultidiscountCalculator extends HTMLElement {
         this.generateSummaryListItems();
       }
     });
+    this.addEventListener('copy-summary-list-items', () => {
+        navigator.clipboard.writeText(this.summary.getTextContentOfGroupedProducts());
+        this.header.showTooltip();
+        setTimeout(() => {
+          this.header.hideTooltip();
+        }, 1500);
+    })
   }
   getElementsReferences() {
+    this.header = this.shadowRoot.querySelector(Header.TAG) as Header;
     this.discountDefinition = this.shadowRoot.querySelector(DiscountDefinition.TAG) as DiscountDefinition;
     this.products = this.shadowRoot.querySelector(Products.TAG) as Products;
     this.summary = this.shadowRoot.querySelector(Summary.TAG) as Summary;
