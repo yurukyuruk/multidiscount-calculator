@@ -137,7 +137,21 @@ export class Header extends HTMLElement {
           composed: true,
         });
         this.shadowRoot.dispatchEvent(copySummaryListItems);
-      });
+    });
+    this.whatsappButton.addEventListener('click', () => {
+        const shareOnWhatsappWeb = new CustomEvent('share-on-whatsapp-web', {
+          bubbles: true,
+          composed: true,
+        });
+        this.shadowRoot.dispatchEvent(shareOnWhatsappWeb);
+    });
+    this.emailButton.addEventListener('click', () => {
+        const shareViaEmail = new CustomEvent('share-via-email', {
+          bubbles: true,
+          composed: true,
+        });
+        this.shadowRoot.dispatchEvent(shareViaEmail);
+    });
   }
   showTooltip() {
     this.tooltip.style.visibility= "visible";

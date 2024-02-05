@@ -3,6 +3,7 @@ import { DiscountDefinition } from './DiscountDefinition';
 import { Products } from './Products';
 import { Summary } from './Summary';
 import { ProductGroup } from './ProductGroup';
+import { FabButton } from './FabButton';
 
 const template = /*html*/ `
 <style> 
@@ -28,6 +29,7 @@ const template = /*html*/ `
       <${Summary.TAG}></${Summary.TAG}>
   </section>
 </main>
+<${FabButton.TAG}></${FabButton.TAG}>
 `;
 export class MultidiscountCalculator extends HTMLElement {
   static TAG = 'multidiscount-calculator';
@@ -37,7 +39,7 @@ export class MultidiscountCalculator extends HTMLElement {
   discountDefinition!: DiscountDefinition;
   products!: Products;
   summary!: Summary;
-
+  fabButton!: FabButton;
   constructor() {
     super();
     this.shadowRoot = this.attachShadow({ mode: 'open' });
@@ -80,12 +82,29 @@ export class MultidiscountCalculator extends HTMLElement {
           this.header.hideTooltip();
         }, 1500);
     })
+    this.addEventListener('share-on-mobile', () => {
+      navigator.share({text: this.summary.getTextContentOfGroupedProducts()})
+      .then(() => {
+        console.log('Text shared successfully');
+      })
+    })
+    this.addEventListener("share-on-whatsapp-web", () => {
+      window.open(`https://api.whatsapp.com:/send?text= ${this.summary.getTextContentOfGroupedProducts()}`);
+    })
+    this.addEventListener('share-via-email', () => {
+      const email = 'recipient@example.com'; 
+      const subject = 'Multidiscount Calculator Results';
+      const body = `${this.summary.getTextContentOfGroupedProducts()}`; 
+      const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
+    })
   }
   getElementsReferences() {
     this.header = this.shadowRoot.querySelector(Header.TAG) as Header;
     this.discountDefinition = this.shadowRoot.querySelector(DiscountDefinition.TAG) as DiscountDefinition;
     this.products = this.shadowRoot.querySelector(Products.TAG) as Products;
     this.summary = this.shadowRoot.querySelector(Summary.TAG) as Summary;
+    this.fabButton = this.shadowRoot.querySelector(FabButton.TAG) as FabButton;
   }
 }
 customElements.define(MultidiscountCalculator.TAG, MultidiscountCalculator);

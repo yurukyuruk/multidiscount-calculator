@@ -19,6 +19,15 @@ export class FabButton extends HTMLElement {
   setClassName() {
     this.fabButton.className = "fab-button";
   }
+  initializeListeners() {
+    this.fabButton.addEventListener('click', () => {
+      const shareOnMobile = new CustomEvent('share-on-mobile', {
+        bubbles: true,
+        composed: true,
+      });
+      this.shadowRoot.dispatchEvent(shareOnMobile);
+    });
+  }
   getElementsReferences() {
     this.fabButton = this.shadowRoot.querySelector(".fab-button") as Button;
   }

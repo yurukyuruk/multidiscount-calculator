@@ -80,8 +80,7 @@ export class ProductsAndSavingsListItem extends HTMLElement {
     
     return `
     ${this.productListSummaryHeader.textContent} (${this.savings.textContent})
-    ${uLItems}
-    `;
+    ${uLItems}`;
   }
   setProductListSummaryHeader(numberOfProducts: number, discountRatio: number) {
     this.productListSummaryHeader.innerHTML = `${numberOfProducts} Products, ${discountRatio}% Discount`;
