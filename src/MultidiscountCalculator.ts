@@ -75,29 +75,28 @@ export class MultidiscountCalculator extends HTMLElement {
         this.generateSummaryListItems();
       }
     });
-    this.addEventListener('copy-summary-list-items', () => {
-        navigator.clipboard.writeText(this.summary.getTextContentOfGroupedProducts());
-        this.header.showTooltip();
-        setTimeout(() => {
-          this.header.hideTooltip();
-        }, 1500);
-    })
+    /*this.addEventListener('copy-summary-list-items', () => {
+      navigator.clipboard.writeText(this.summary.getTextContentOfGroupedProducts());
+      this.header.showTooltip();
+      setTimeout(() => {
+        this.header.hideTooltip();
+      }, 1500);
+    });
     this.addEventListener('share-on-mobile', () => {
-      navigator.share({text: this.summary.getTextContentOfGroupedProducts()})
-      .then(() => {
+      navigator.share({ text: this.summary.getTextContentOfGroupedProducts() }).then(() => {
         console.log('Text shared successfully');
-      })
-    })
-    this.addEventListener("share-on-whatsapp-web", () => {
+      });
+    });*/
+    this.addEventListener('share-on-whatsapp-web', () => {
       window.open(`https://api.whatsapp.com:/send?text= ${this.summary.getTextContentOfGroupedProducts()}`);
-    })
+    });
     this.addEventListener('share-via-email', () => {
-      const email = 'recipient@example.com'; 
+      const email = 'recipient@example.com';
       const subject = 'Multidiscount Calculator Results';
-      const body = `${this.summary.getTextContentOfGroupedProducts()}`; 
+      const body = `${this.summary.getTextContentOfGroupedProducts()}`;
       const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       window.location.href = mailtoUrl;
-    })
+    });
   }
   getElementsReferences() {
     this.header = this.shadowRoot.querySelector(Header.TAG) as Header;

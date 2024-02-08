@@ -14,10 +14,11 @@ export class FabButton extends HTMLElement {
     this.shadowRoot = this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = template;
     this.getElementsReferences();
+    this.initializeListeners();
     this.setClassName();
   }
   setClassName() {
-    this.fabButton.className = "fab-button";
+    this.fabButton.className = 'fab-button';
   }
   initializeListeners() {
     this.fabButton.addEventListener('click', () => {
@@ -29,7 +30,7 @@ export class FabButton extends HTMLElement {
     });
   }
   getElementsReferences() {
-    this.fabButton = this.shadowRoot.querySelector(".fab-button") as Button;
+    this.fabButton = this.shadowRoot.querySelector('.fab-button') as Button;
   }
 }
 customElements.define(FabButton.TAG, FabButton);

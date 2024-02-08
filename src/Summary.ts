@@ -35,7 +35,7 @@ export class Summary extends HTMLElement {
   shadowRoot: ShadowRoot;
   generateButton!: Button;
   productsAndSavingList!: HTMLUListElement;
-  textContentOfListItems!: [];
+  textContentOfListItems!: string[];
   constructor() {
     super();
     this.shadowRoot = this.attachShadow({ mode: 'open' });
@@ -72,14 +72,14 @@ export class Summary extends HTMLElement {
     newProductsAndSavingsListItem.createGroupedProductAndSetText(groupedProductText);
     newProductsAndSavingsListItem.setSavingsText(savingsText);
     this.productsAndSavingList.append(newProductsAndSavingsListItem);
-    
+
     this.getTextContentOfGroupedProduct(newProductsAndSavingsListItem);
   }
   getTextContentOfGroupedProduct(newListItem: ProductsAndSavingsListItem) {
     this.textContentOfListItems.push(newListItem.getTextContentOfListItem());
-  };
+  }
   getTextContentOfGroupedProducts() {
-    return this.textContentOfListItems.join("\n");
+    return this.textContentOfListItems.join('\n');
   }
   getElementsReferences() {
     this.generateButton = this.shadowRoot.querySelector(Button.TAG) as Button;

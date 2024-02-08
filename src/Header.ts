@@ -123,47 +123,47 @@ export class Header extends HTMLElement {
     this.setClassNamesAndTextContentToButtons();
   }
   setClassNamesAndTextContentToButtons() {
-    this.copyButton.className = "copy-button";
-    this.copyButton.textContent = "Copy";
-    this.whatsappButton.className = "whatsapp-button";
-    this.whatsappButton.textContent = "WhatsApp";
-    this.emailButton.className = "email-button";
-    this.emailButton.textContent = "E-mail";
+    this.copyButton.className = 'copy-button';
+    this.copyButton.textContent = 'Copy';
+    this.whatsappButton.className = 'whatsapp-button';
+    this.whatsappButton.textContent = 'WhatsApp';
+    this.emailButton.className = 'email-button';
+    this.emailButton.textContent = 'E-mail';
   }
   initializeListeners() {
     this.copyButton.addEventListener('click', () => {
-        const copySummaryListItems = new CustomEvent('copy-summary-list-items', {
-          bubbles: true,
-          composed: true,
-        });
-        this.shadowRoot.dispatchEvent(copySummaryListItems);
+      const copySummaryListItems = new CustomEvent('copy-summary-list-items', {
+        bubbles: true,
+        composed: true,
+      });
+      this.shadowRoot.dispatchEvent(copySummaryListItems);
     });
     this.whatsappButton.addEventListener('click', () => {
-        const shareOnWhatsappWeb = new CustomEvent('share-on-whatsapp-web', {
-          bubbles: true,
-          composed: true,
-        });
-        this.shadowRoot.dispatchEvent(shareOnWhatsappWeb);
+      const shareOnWhatsappWeb = new CustomEvent('share-on-whatsapp-web', {
+        bubbles: true,
+        composed: true,
+      });
+      this.shadowRoot.dispatchEvent(shareOnWhatsappWeb);
     });
     this.emailButton.addEventListener('click', () => {
-        const shareViaEmail = new CustomEvent('share-via-email', {
-          bubbles: true,
-          composed: true,
-        });
-        this.shadowRoot.dispatchEvent(shareViaEmail);
+      const shareViaEmail = new CustomEvent('share-via-email', {
+        bubbles: true,
+        composed: true,
+      });
+      this.shadowRoot.dispatchEvent(shareViaEmail);
     });
   }
   showTooltip() {
-    this.tooltip.style.visibility= "visible";
+    this.tooltip.style.visibility = 'visible';
   }
   hideTooltip() {
-    this.tooltip.style.visibility= "hidden";
+    this.tooltip.style.visibility = 'hidden';
   }
   getElementsReferences() {
-    this.copyButton = this.shadowRoot.querySelector(".copy-button") as Button;
-    this.whatsappButton = this.shadowRoot.querySelector(".whatsapp-button") as Button;
-    this.emailButton = this.shadowRoot.querySelector(".email-button") as Button;
-    this.tooltip = this.shadowRoot.querySelector(".tooltip") as HTMLDivElement;
+    this.copyButton = this.shadowRoot.querySelector('.copy-button') as Button;
+    this.whatsappButton = this.shadowRoot.querySelector('.whatsapp-button') as Button;
+    this.emailButton = this.shadowRoot.querySelector('.email-button') as Button;
+    this.tooltip = this.shadowRoot.querySelector('.tooltip') as HTMLDivElement;
   }
 }
 customElements.define(Header.TAG, Header);

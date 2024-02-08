@@ -72,12 +72,12 @@ export class ProductsAndSavingsListItem extends HTMLElement {
   }
   getTextContentOfListItem() {
     let uLItems = ``;
-    let groupedProductListItems = [...this.groupedPreductList.children];
+    const groupedProductListItems = [...this.groupedPreductList.children];
     groupedProductListItems.forEach((groupedProduct) => {
       uLItems += `
       ∙${groupedProduct.textContent}`;
-    })
-    
+    });
+
     return `
     ${this.productListSummaryHeader.textContent} (${this.savings.textContent})
     ${uLItems}`;
@@ -95,9 +95,6 @@ export class ProductsAndSavingsListItem extends HTMLElement {
   }
   setSavingsText(text: number) {
     this.savings.innerHTML = `SAVINGS: ${text}`;
-  }
-  createClipboardText() {
-
   }
   getElementsReferences() {
     this.groupedPreductList = this.shadowRoot.querySelector('ul') as HTMLUListElement;
