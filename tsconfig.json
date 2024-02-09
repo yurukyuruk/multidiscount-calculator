@@ -31,8 +31,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
   },
-  "include": ["src", "main.ts", "tests"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src", "main.ts", "tests", "vite.config.ts"],
+  "exclude": ["node_modules", "dist"],
 }

@@ -3,8 +3,8 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "paths": ["src", "main.ts"],
-        "extensions": [".js",".ts"]
+        "paths": ["src", "tests", "main.ts", "vite.config.ts"],
+        "extensions": [".js", ".ts"]
       }
     }
   },
