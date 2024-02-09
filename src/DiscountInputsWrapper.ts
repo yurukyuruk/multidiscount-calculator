@@ -11,6 +11,12 @@ const template =
         align-items: start;
         padding-top: 10px;
     }
+    .delete-button {
+      margin-right: 5px;
+    }
+    .first-input {
+      margin-right: 5px;
+    }
     </style>
     <li class="inputs-wrapper">
         <${Button.TAG} class="delete-button"></${Button.TAG}>
